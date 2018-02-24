@@ -1,7 +1,0 @@
-﻿網頁設計作業
-1. 基本資料: personinfo.html (Html Table)
-2. 個人首頁: home.html
-3. 作品集: portfolio.html (Div or Table)
-4. 個人年表: history.html (Div)
-5. 電商網站: ec.html (假樣資料)
-due date: 3/23
