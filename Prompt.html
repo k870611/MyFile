@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">  
+	.circle{    
+		width: 25px;      
+		height: 25px;    
+		font-size:15px;  
+		background-color:red;      
+		border-radius: 50%;      
+		-moz-border-radius: 50%;      
+		-webkit-border-radius: 50%;   
+		text-align: center;
+		color:white;
+	}
+	
+	.childElement {
+      position: relative;
+      top: 3px;
+    }
+</style>
+
+<script type="text/javascript">
+function _add(){
+	var a=prompt("请输入您的名字进行验证：","Password");
+	
+	if(a=="lewanzi")
+	alert("你的输入正确！");
+	else
+	alert("你的输入不正确！");
+}
+</script>
+
+</head>
+<body>
+	<div class="circle"><span class="childElement">21</span></div>
+	<input type="button" value="用户名" onclick="_add()">
+</body>
+</html>
