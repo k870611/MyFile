@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/accmanagementlayout.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/onlineuserstyle.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar-menu.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/datepicker.min.css') }}">
+
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/sidebar-menu.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/datepicker.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/datepicker.en.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/screenfull.js') }}"></script>
+
+<title>中央管理系統(CMS)</title>
+</head>
+
+<body>
+<div id="BlockWindow" style="z-index:100; width:100%; height:100%; background:#e5e5e5; position:fixed; top:0px; left:0px; opacity:0.5; display:none;"></div>
+<div class="wrapper">
+	<header>
+		<!--導航列-->
+		{% include 'HeadNav.html' %}
+		<!--end 導航列-->
+
+		<ul class="SecondNavBar">
+			<li class="NavLi1"><div class="GoToOther"><a href="/serverinfo" class="anchor" >Server 列表</a></div></li>
+			<li class="NavLi1"><div class="GoToOther"><a href="/eventlist" class="anchor">事件列表</a></div></li>
+		</ul>
+	</header><!-- .header-->
+
+	<div class="middle">
+
+		<aside class="left-sidebar"> 
+			<aside class="main-sidebar">
+				<section  class="sidebar">
+					<ul class="sidebar-menu">
+				      
+				      	<li class="treeview active">
+					        <a href="#">
+					          	<span>Membership</span> <i class="fa fa-toggle-up pull-right"></i>
+					        </a>
+					        <ul class="treeview-menu">
+					        	<li>&nbsp;</li>
+						    	<li><a href="/accmanagement"><i class="fa fa-chevron-right"></i> Account management</a></li>
+						  		<li><a href="/role"><i class="fa fa-chevron-right"></i> Role management</a></li>
+						   		<li><a href="#"><i class="fa fa-chevron-right"></i> Online User List</a></li>
+					        	<li>&nbsp;</li>
+					        </ul>
+				      	</li>
+				      
+						<li class="treeview">
+							<a href="#">
+				           		<span>Device</span> <i class="fa fa-toggle-up pull-right"></i>
+							</a>
+				        	<ul class="treeview-menu" style="display: none;">
+				        		<li>&nbsp;</li>
+								<li><a href="/itmanagement"><i class="fa fa-chevron-right"></i> IT Management</a></li>
+				        		<li>&nbsp;</li>
+				        	</ul>
+				      	</li>
+				      
+						<li class="treeview">
+							<a href="#">
+								<span>Log</span> <i class="fa fa-toggle-up pull-right"></i>
+					        </a>
+					        <ul class="treeview-menu">
+					        	<li>&nbsp;</li>
+								<li><a href="/log"><i class="fa fa-chevron-right"></i> System operation log</a></li>
+					        	<li>&nbsp;</li>
+					        </ul>
+				      	</li>
+			
+				    </ul>
+				</section>
+			</aside>
+		</aside><!-- .left-sidebar -->
+		
+		<aside class="right-sidebar">
+			<ul class="SideNavBar" id="rightNav" style="background-color:#004d74;">
+				<li class="NavLi1">
+					<div style="width:400px; height:42px">
+
+						<select style="position:absolute; left:30px; top:18px; border-radius:5px; width:200px; height:30px; background:#5e83a0; border-color:#5e83a0; color:white; font-family:'微軟正黑體', '新細明體'; font-size:15px;">
+							{% if filter == 'account'%}
+								<option value="account" selected>Account</option>
+								<option value="name">Name</option>
+								<option value="org">Organization</option>
+
+							{% elif filter == 'name' %}
+								<option value="account">Account</option>
+								<option value="name" selected>Name</option>
+								<option value="org">Organization</option>
+
+							{% elif filter == 'org' %}
+								<option value="account">Account</option>
+								<option value="name">Name</option>
+								<option value="org" selected>Organization</option>
+							{% endif %}
+
+						</select>
+						
+						<input id="text_acc" type="text" value="{{value}}" style="position:absolute; left:230px; top:15px; border-radius:5px; width:200px; height:30px; background:#b2cac9; border-color:#b2cac9; font-family:'微軟正黑體', '新細明體'; font-size:15px;"/>
+						<input id="clean_acc" type="image" src="{{ url_for('static', filename='img/clean_acc.png') }}" class="btnRightNav" style="position:absolute; left:420px; top:15px; border-radius:5px; border-left:groove 2px Black; width:35px;height:35px; float:right;">
+						<input id="search_acc" type="image" src="{{ url_for('static', filename='img/search_acc.png') }}" class="btnRightNav" style="position:absolute; left:420px; top:15px; border-radius:5px;border-left:groove 2px Black; width:35px;height:35px; float:right;">
+
+					</div>
+				</li>
+			</ul>
+			
+			<ul class="SecondNavBar" style="background:#1a1e21;">
+				<li class="NavLi1"><div style="color:#bad0d5; border-radius: 3px; font-size:15px; font-weight: bold; height:20px; padding:5px 5px 0px 5px;">Online user list</div></li>
+			</ul>
+
+			<table class="MainTable" border="1" style="">
+				<thead style="background:#32688e; color:white; font-family:'微軟正黑體', '新細明體'; font-size:14px;" align="left" >
+					<tr style="font-size:15px;">
+						<td style="border-right:groove 2px #e3e3e3; padding:10px;">Account</td>
+						<td style="border-right:groove 2px #e3e3e3; padding:10px;">Name</td>
+						<td style="border-right:groove 2px #e3e3e3; padding:10px 8px 10px 10px;">Organization</td>
+						<td style="border-right:groove 2px #e3e3e3; padding:10px 9px 10px 10px;">E-mail</td>
+						<td style="border-right:groove 2px #e3e3e3; padding:10px 8px 10px 10px;">Cellphone</td>
+						<td style="border-right:groove 2px #e3e3e3; padding:10px 30px 10px 10px;">Last operation date</td>
+					</tr>
+				</thead>
+
+				<tbody style="background:#477a9c; color:white; font-family:'微軟正黑體', '新細明體';">
+					{% for info in acc_info %}
+		   			<tr>
+						<td>{{info.acc_management_account}}</td>
+						<td>{{info.acc_management_name}}</td>
+						<td>{{info.acc_management_organization}}</td>
+						<td>{{info.acc_management_email}}</td>
+						<td>{{info.acc_management_phone}}</td>
+						<td>{{info.acc_management_operate_date}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+
+				<tfoot style="background:#3d5074; color:white; font-family:'微軟正黑體', '新細明體'; font-size:14px; width:500px; padding:0px;" align="left">
+					<tr>
+						<td style="padding:10px; text-align:left;">
+							{% if prev_url%}
+								<a href="onlineSearch?page=1&filter={{filter}}&value={{value}}" class="anchor">
+									<button style="color:white">
+										<span style="position: relative; bottom:1px;">|</span><i class="fa fa-caret-left"></i>
+									</button>
+								</a>
+							{% else %}
+								<button>
+									<span style="position: relative; bottom:1px;">|</span><i class="fa fa-caret-left"></i>
+								</button>
+
+							{% endif%}
+
+							{% if prev_url%}
+								<a href="{{prev_url}}" class="anchor">
+									<button style="color:white">
+										<i class="fa fa-caret-left"></i>
+									</button>
+								</a>
+							{% else %}
+								<button>
+									<i class="fa fa-caret-left"></i>
+								</button>
+							{% endif%}
+
+							Page <input type="text" value="{{ page }}" style="width:30px; text-align:center;" readonly> of {{pageTotal}}
+
+							{% if next_url%}
+								<a href="{{next_url}}" class="anchor">
+									<button style="color:white">
+										<i class="fa fa-caret-right"></i>
+									</button>
+								</a>
+							{% else %}
+								<button>
+									<i class="fa fa-caret-right"></i>
+								</button>
+							{% endif%}
+
+							{% if next_url%}
+								<a href="onlineSearch?page={{pageTotal}}&filter={{filter}}&value={{value}}" class="anchor">
+									<button style="color:white">
+										<i class="fa fa-caret-right"></i><span style="position: relative; bottom:1px;">|</span>
+									</button>
+								</a>
+							{% else %}
+								<button>
+									<i class="fa fa-caret-right"></i><span style="position: relative; bottom:1px;">|</span>
+								</button>
+							{% endif%}
+
+							<a style="color:white" onClick="window.location.reload()">
+								<button style="color:white; margin-left:10px;">
+									<i class="fa fa-repeat"></i>
+								</button>
+							</a>
+
+							<span style="float:right; padding:5px 15px 0px 0px;font-size:15px;">Total : {{rowTotal}}, {{((page-1)*2)+1}}/{{rowTotal}}</span>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</aside><!-- .right-sidebar -->
+	</div><!-- .middle-->
+</div><!-- .wrapper -->
+
+<script>
+
+	$(document).ready(function(){
+		//SearchNavBar-------------------------------------------------------------
+	   	$('#clean_acc').hide();
+		
+		$('#text_acc').click(function(){
+			
+			$('#search_acc').css('left','455px');
+			$('#clean_acc').show();
+		});
+		
+		$('#text_acc').focusout(function(){
+			if($(this).val() == ''){
+				chkSearchText();
+			}
+		});
+
+		function chkSearchText(){
+			setTimeout(function() {
+				$('#text_acc').val('');
+				$('#search_acc').css('left','420px');
+				$('#clean_acc').hide();
+			}, 500);
+		}
+
+		$('#clean_acc').click(function(){
+			window.location.href = ('/online');
+		});
+
+		$('#search_acc').click(function(){
+			var filter = $('#rightNav select').val();
+			var value = $('#text_acc').val();
+
+			window.location.href = ('/onlineSearch?filter='+filter+'&value='+value);
+		});
+	});
+	
+/*fullScreen-------------------------------------------------------------------*/	
+	var FullScreen = false;
+	
+	$('#fullScreen').click(function() {
+		if (screenfull.enabled && !FullScreen) {
+			FullScreen = true;
+			screenfull.request();
+			
+		}else if(screenfull.enabled && FullScreen){
+			FullScreen = false;
+			screenfull.exit();
+		}
+	});
+</script>
+
+<script>
+	$.sidebarMenu($('.sidebar-menu'))
+</script>
+
+</body>
+</html>
