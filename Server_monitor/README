@@ -1,0 +1,12 @@
+These functions are written based on python3.
+
+Steps:
+1. build databases: 
+python3 python3-step1-build_mysql_databases.py
+
+2. import store procedures:
+mysql --user=root --password=dc2018_BMC  < storeProcedures/procInsertDataToServer_sdr.sql
+
+3. parsing txt.2 files to txt.4 files, which contain store procedures commands:
+python3 ParsingIpmiMultiThread.py
+
