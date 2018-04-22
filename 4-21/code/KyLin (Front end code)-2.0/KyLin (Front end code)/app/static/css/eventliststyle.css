@@ -1,0 +1,175 @@
+	.TopNavBar{
+		background:url(../img/bg1.png);
+		list-style-type: none;
+		margin: 0px;
+		padding: 0px;
+		width: auto;
+		overflow: hidden;
+	}
+	.SecondNavBar{
+		background-color: #112347;
+		list-style-type: none;
+		margin: 0px;
+		padding: 0px;
+		width: auto;
+		overflow: hidden;
+	}
+	.SideNavBar{
+		background-color: #0b172d;
+		list-style-type: none;
+		margin: 0px;
+		padding: 0px;
+		width: 100%;
+		overflow: hidden;
+	}
+	.NavLi1{
+		font-family: "Microsoft JhengHei", "PMingLiU";
+		font-size: 18px;
+		font-weight: bold;
+		color: #EEEEEE;
+		float: left;
+		padding: 10px;
+	}
+	.NavLi2{
+		font-family: "Microsoft JhengHei", "PMingLiU";
+		font-size: 18px;
+		font-weight: bold;
+		color: #EEEEEE;
+		float: right;
+		padding: 10px;
+	}
+	.anchor{
+		color: white;
+		text-decoration:none;
+	}
+	
+	.MainTable{
+		width:100%; 
+		height:calc(100% - 100px);
+		border-collapse:separate;
+		border:groove 2px Black; 
+	}
+	
+	.MainTable td{
+	/*cellpadding="10px" cellspacing="5px"*/
+		padding:10px;
+		border-spacing:10px;
+	}	
+	
+	.MainTable tbody {
+		height:100%;
+		max-height:776px;
+	    display:block;
+	    overflow-y:auto;
+	}
+
+	.MainTable thead, tbody tr {
+	    display:table;
+	    width:100%;
+	    table-layout:fixed;
+	}
+	
+	.MainTable thead {
+	    width: calc( 100% - 20px);
+	}
+	
+	.MainTable tbody tr:hover td{
+		background-color: #5c6086;
+	}
+	
+	.MainTable tr td:nth-child(1){
+		font-size:15px;
+		text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width:40px;
+	}
+
+	.MainTable tr td:nth-child(1) span{
+		color:black;
+		border-radius: 3px;
+		padding:0px 5px 0px 5px;
+	}
+	
+	.MainTable tr td:nth-child(2){
+		font-size:15px;
+		font-weight:bold;
+		text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width:125px;
+	}	
+	
+	.MainTable tr td:nth-child(3){
+		font-size:15px;
+		font-weight:bold;
+		text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width:180px;
+	}	
+	
+	.MainTable tr td:nth-child(4){
+		font-size:15px;
+		font-weight:bold;
+		text-overflow: ellipsis; overflow: hidden; max-width:50px;
+	}
+
+	.MainTable tr td:nth-child(4) p{
+		max-width: 90px;
+		height:40px;
+		word-wrap:break-word;
+	}
+	
+	.MainTable tbody tr td:nth-child(5) button{
+		vertical-align:middle;
+		padding:5px;
+		border-radius:5px;
+		margin-left:10px;
+		font-size:12px;
+		font-weight:bold;
+		background:black;
+		border-color:black;
+		color:#6ca737;
+		max-width:60px;
+	}
+	
+	.MainTable tbody tr td:nth-child(6) button{
+		vertical-align:middle;
+		padding:5px;
+		border-radius:5px;
+		margin-left:10px;
+		font-size:12px;
+		background:black;
+		border-color:black;
+		color:white;
+		max-width:60px;
+	}
+
+	.circle{
+		width: 25px;      
+		height: 25px;    
+		font-size:15px;  
+		background-color:red;      
+		border-radius: 50%;      
+		-moz-border-radius: 50%;      
+		-webkit-border-radius: 50%;   
+		text-align: center;
+		color:white;
+	}
+    
+    .btnleftNav{
+    	color:white; 
+    	border-radius: 3px; 
+    	font-size:15px; 
+    	width:120px;
+    	height:30px; 
+    	padding:5px 5px 5px 5px;
+    	background:#484e68;
+    	border-color: #484e68;
+    	font-weight: bold;
+    	border-bottom:white;
+    	border-right:white;
+    }
+    
+	.btnleftNav:hover{
+		cursor:pointer;
+    	background:#8bc35d;
+		border-color:#8bc35d;
+    }
+    
+    .btnleftNav:focus{
+    	background:#8bc35d;
+		border-color:#8bc35d;
+    }

@@ -1,0 +1,764 @@
+@charset "utf-8";
+
+thead{
+	height: 40px;
+}
+
+.TopNavBar {
+	background: url(../img/bg1.png);
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	overflow: hidden;
+}
+
+.SecondNavBar {
+	background-color: #112347;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	overflow: hidden;
+}
+
+.SideNavBar {
+	background-color: #0b172d;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.NavLi1 {
+	font-family: "Microsoft JhengHei", "PMingLiU";
+	font-size: 18px;
+	font-weight: bold;
+	color: #EEEEEE;
+	float: left;
+	padding: 10px;
+}
+
+.NavLi2 {
+	font-family: "Microsoft JhengHei", "PMingLiU";
+	font-size: 18px;
+	font-weight: bold;
+	color: #EEEEEE;
+	float: right;
+	padding: 10px;
+}
+
+.anchor {
+	color: white;
+	text-decoration: none;
+}
+
+.leftTable {
+	width: 100%;
+	height: calc(100% - 54px);
+	border-spacing: 0;
+	border: groove 2px Black;
+}
+
+.leftTable thead{
+	background:#222e46; 
+	color:white; 
+	font-family: "Microsoft JhengHei", "PMingLiU";
+	font-size:14px;
+	text-align:left;
+}
+
+.leftTable thead tr {
+	display: block;
+}
+
+.leftTable thead tr th {
+	border-right:groove 2px white;
+}
+
+.leftTable thead tr th:nth-child(5) {
+	padding:10px;
+	font-size: 15px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: top;
+	min-width:265px; 
+	max-width:265px;
+}
+
+.leftTable tbody {
+	display: block;
+	background:#293155; 
+	color:white; 
+	font-family: "Microsoft JhengHei", "PMingLiU";
+	height: calc(100% -  5px);
+	overflow-y: auto;
+	overflow-x: hidden;
+	text-align: left;
+}
+
+.leftTable td, .leftTable tr th{
+	padding: 10px;
+}
+
+.leftTable tr td:nth-child(1), .leftTable tr th:nth-child(1){
+	text-align:center;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 49px;
+	max-width: 49px;
+}
+
+.leftTable tr td:nth-child(2), .leftTable tr th:nth-child(2){
+	font-size: 13px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 104px;
+	max-width: 104px;
+}
+
+.leftTable tr td:nth-child(3), .leftTable tr th:nth-child(3){
+	font-size: 13px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 129px;
+	max-width: 129px;
+}
+
+.leftTable tr td:nth-child(4), .leftTable tr th:nth-child(4){
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 34px;
+	max-width: 34px;
+}
+
+.leftTable tr td:nth-child(5) {
+	padding:0px;
+	font-size: 15px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: top;
+	min-width: 295px;
+	max-width: 295px;
+}
+
+
+.leftTable tbody tr:hover td{
+	background:#5c6086;
+	border-color:#5c6086;
+}
+
+.tbInfo {
+	display:none;
+	width: 100%;
+	border-collapse: separate;
+	border: groove 0px Black;
+}
+
+.tbInfo td {
+	padding: 10px;
+}
+
+.tbSDR {
+	display:none;
+	width: 100%;
+	height: calc(100% -  52px);
+	border-spacing: 0;
+	border: groove 2px Black;
+}
+
+.tbSDR tbody {
+	display: block;
+}
+
+.tbSDR thead tr {
+	display: block;
+}
+
+.tbSDR tbody {
+	height: calc(100%);
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.tbSDR td {
+	padding: 10px;
+}
+
+.tbSDR tr td:nth-child(1) {
+	font-size: 15px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 240px;
+	max-width: 240px;
+}
+
+.tbSDR tr td:nth-child(2) {
+	font-size: 15px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 155px;
+	max-width: 155px;
+}
+
+.tbSDR tr td:nth-child(3) {
+	font-size: 15px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 160px;
+	max-width: 160px;
+}
+
+.tbSDR tbody tr td:nth-child(4) {
+	text-align: right;
+	font-size: 15px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 35px;
+	max-width: 35px;
+	cursor: pointer;
+}
+
+.tbLan {
+	display:none;
+	width: 100%;
+	height: calc(100% -  52px);
+	border-spacing: 0;
+	border: groove 2px Black;
+}
+
+.tbLan tbody {
+	display: block;
+}
+
+.tbLan thead tr {
+	display: block;
+}
+
+.tbLan tbody {
+	height: calc(100%);
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.tbLan td {
+	padding: 10px;
+}
+
+.tbLan tr td:nth-child(1) {
+	font-size: 15px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 318px;
+	max-width: 318px;
+}
+
+.tbLan tr td:nth-child(2) {
+	font-size: 15px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 318px;
+	max-width: 318px;
+}
+
+.tbList {
+	width: 99%;
+	height: calc(100% -  52px);
+	border-spacing: 0;
+	border: groove 2px Black;
+}
+
+.tbList tbody {
+	display: block;
+}
+
+.tbList thead tr {
+	display: block;
+}
+
+.tbList tbody {
+	height: calc(100%);
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.tbList td {
+	padding: 10px;
+}
+
+.tbList tr td:nth-child(1) {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 103px;
+	max-width: 103px;
+}
+
+.tbList tr td:nth-child(2) {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 160px;
+	max-width: 160px;
+}
+
+.tbList tr td:nth-child(3) {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 77px;
+	max-width: 77px;
+}
+
+.tbList tr td:nth-child(4) {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 68px;
+	max-width: 68px;
+}
+
+.tbList tr td:nth-child(5) {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 135px;
+	max-width: 135px;
+}
+
+.tbList tr td:nth-child(6) {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 120px;
+	max-width: 120px;
+}
+
+.tbList tr td:nth-child(7) {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 153px;
+	max-width: 153px;
+}
+
+.tbList {
+	width: 99%;
+	height: calc(100% -  52px);
+	border-spacing: 0;
+	border: groove 2px Black;
+}
+
+.tbListSittingInfo tbody {
+	display: block;
+}
+
+.tbListSittingInfo thead tr {
+	display: block;
+}
+
+.tbListSittingInfo tbody {
+	height: calc(100%);
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.tbListSittingInfo td {
+	padding: 10px;
+}
+
+.tbListSittingInfo tr td:nth-child(1) {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 433px;
+	max-width: 433px;
+}
+
+.tbListSittingInfo tr td:nth-child(2) {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	min-width: 450px;
+	max-width: 450px;
+}
+
+.tbListSitting {
+	width: 100%;
+	border-collapse: separate;
+	border: groove 2px Black;
+}
+
+.tbListSitting thead td {
+	padding: 10px;
+	border-right: groove 2px white;
+}
+
+.tbListSitting tbody td {
+	/*cellpadding="10px" cellspacing="5px"*/
+	padding: 8px;
+	border-spacing: 10px;
+}
+
+.tbListSitting tbody tr td:nth-child(1) {
+	max-width: 60px;
+}
+
+.tbListSitting tbody tr td:nth-child(2) {
+	max-width: 500px;
+}
+
+.tbListSittingChart{
+	width:100%; 
+	border-collapse:separate; 
+	border:groove 2px Black; 
+}
+
+.tbListSittingChart td{
+/*cellpadding="10px" cellspacing="5px"*/
+	padding:10px;
+	border-spacing:10px;
+}
+
+.tbListSittingChart thead td{
+	border-right:groove 2px white;
+}
+
+.dropdown {
+	float: left;
+	position: relative;
+	top: 10px;
+	margin-left: 5px;
+}
+
+.dropdown .dropbtn {
+	width: 60px;
+	height: 25px;
+	color: white;
+	border: none;
+	padding: 2px 5px;
+	/* Styles */
+	background: #111e38;
+	border-radius: 5px;
+	cursor: pointer;
+	outline: none;
+	text-align: left;
+	font-size: 15px;
+}
+
+.dropbtn:after { /* Little arrow */
+	content: "";
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	margin-top: -3px;
+	border-width: 6px 6px 0 6px;
+	border-style: solid;
+	border-color: #fff transparent;
+}
+
+.dropdown:hover .dropbtn,.dropbtn:focus {
+	border-radius: 5px 5px 0 0;
+	background: #d2912f;
+	box-shadow: none;
+	border-bottom: none;
+	color: white;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	float: none;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.dropbtnList {
+	width: 60px;
+	height: 25px;
+	color: white;
+	border: none;
+	padding: 2px 5px;
+	/* Styles */
+	background: #111e38;
+	border-radius: 5px;
+	cursor: pointer;
+	outline: none;
+	font-size: 15px;
+}
+
+.dropbtnList:hover,.dropbtnList:focus {
+	border-radius: 5px 5px 0 0;
+	background: #d2912f;
+	box-shadow: none;
+	border-bottom: none;
+	color: white;
+}
+
+.btnJBOD {
+	width: 60px;
+	height: 25px;
+	color: white;
+	border: none;
+	padding: 2px 5px;
+	/* Styles */
+	background: #111e38;
+	border-radius: 5px;
+	outline: none;
+	font-size: 15px;
+}
+
+.btnJBOD:hover, .btnJBOD:focus {
+	border-radius: 5px 5px 0 0;
+	box-shadow: none;
+	border-bottom: none;
+	color: white;
+}
+
+.show {
+	display: block;
+}
+
+.circle {
+	width: 25px;
+	height: 25px;
+	font-size: 15px;
+	background-color: red;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	text-align: center;
+	color: white;
+}
+
+
+.btnRightNav {
+	color: white;
+	border-radius: 3px;
+	font-size: 15px;
+	width: 55px;
+	height: 30px;
+	padding: 5px 5px 5px 5px;
+	background: #183368;
+	border-color: #183368;
+	font-weight: bold;
+	/*border-bottom: white;
+	border-right: white;*/
+	margin-right:8px;
+}
+
+.btnRightNav:hover {
+	cursor:pointer;
+	background:#8bc35d;
+	border-color:#8bc35d;
+}
+
+.btnRightNav:focus{
+	background:#8bc35d;
+	border-color:#8bc35d;
+}
+
+.ConfirmDialog {
+	position: absolute;
+	top: 450px;
+	left: 525px;
+	width: 320px;
+	height: 145px;
+	border: 1px solid #3f4757;
+	border-radius: 5px;
+	z-index: 300;
+	background-color: #3f4757;
+	padding-top: 15px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	display: none;
+}
+
+.close {
+	float: right;
+	position: relative;
+	top: -5px;
+	right: 10px;
+	border: 0px;
+}
+
+.ConfirmDialogComment {
+	height: 60px;
+	width: 295px;
+	border-radius: 5px;
+	background-color: #464f61;
+	margin: 10px 5px 0 5px;
+	padding-top: 10px;
+	padding-left: 15px;
+	font-size: 15px;
+}
+
+.ConfirmDialog button {
+	background: #111d38;
+	border-color: #111d38;
+	color: white;
+	border-radius: 5px;
+	font-size: 15px;
+	width: 80px;
+	height: 30px;
+	margin-top: 10px;
+	margin-left: 50px;
+}
+
+.ListDialog {
+	position: absolute;
+	top: 200px;
+	left: 200px;
+	width: 1000px;
+	height: 600px;
+	border: 1px solid #3f4757;
+	border-radius: 5px;
+	z-index: 300;
+	background-color: #3f4757;
+	padding-top: 15px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	display: none;
+}
+
+.FunctionTagDialog {
+	position: absolute;
+	top: 450px;
+	left: 525px;
+	width: 320px;
+	height: 145px;
+	border: 1px solid #3f4757;
+	border-radius: 5px;
+	z-index: 300;
+	background-color: #404856;
+	padding-top: 15px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	display: none;
+}
+
+.FunctionTagDialogComment {
+	height: 60px;
+	width: 295px;
+	background-color: #232c35;
+	border-color: black;
+	margin: 10px 5px 0 5px;
+	padding-top: 10px;
+	padding-left: 15px;
+	font-size: 15px;
+}
+
+.FunctionTagDialog button {
+	background: #111d38;
+	border-color: #111d38;
+	color: white;
+	border-radius: 5px;
+	font-size: 15px;
+	width: 80px;
+	height: 30px;
+	margin-top: 10px;
+	float: right;
+	margin-right: 10px;
+}
+
+.HintDialog {
+	position: absolute;
+	top: 350px;
+	left: 525px;
+	width: 325px;
+	height: 270px;
+	border: 1px solid #3f4757;
+	border-radius: 5px;
+	z-index: 300;
+	background-color: #404856;
+	padding-top: 15px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	display: none;
+}
+
+.HintDialogComment {
+	height: 180px;
+	width: 300px;
+	background-color: #232c35;
+	border-color: black;
+	margin: 10px 5px 0 5px;
+	padding-top: 10px;
+	padding-left: 15px;
+	font-size: 15px;
+}
+
+.HintDialog button {
+	background: #111d38;
+	border-color: #111d38;
+	color: white;
+	border-radius: 5px;
+	font-size: 15px;
+	width: 80px;
+	height: 30px;
+	margin-top: 10px;
+	float: right;
+	margin-right: 10px;
+}
+
+.ChartDialog {
+	position: absolute;
+	top: 260px;
+	left: 250px;
+	width: 900px;
+	height: 400px;
+	border: 1px solid #3f4757;
+	border-radius: 5px;
+	z-index: 300;
+	background-color: #3f4757;
+	padding-top: 15px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	display: none;
+}

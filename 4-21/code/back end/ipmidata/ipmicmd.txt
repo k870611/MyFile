@@ -1,0 +1,42 @@
+-h
+lan print
+chassis status
+chassis identify
+chassis policy list
+chassis restart_cause
+chassis poh
+chassis selftest
+mc guid
+mc info
+mc watchdog get
+mc selftest
+mc getenables
+sdr list
+sdr elist
+sensor list
+fru print
+gendev list
+sel list
+sel elist
+isol info
+user list
+channel info
+session info all
+fwum info
+fwum status
+firewall info
+set
+ekanalyzer print all
+
+
+
+
+sdr list
+sdr elist
+sel list
+sel elist
+fru
+hpm targetcap
+hpm check
+hpm upgstatus
+

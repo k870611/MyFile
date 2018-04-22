@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" type="text/css"  media="all" href="{{ url_for('static', filename='css/cantInto.css') }}">
+
+    <title>中央管理系統(CMS)</title>
+</head>
+
+<body>
+    <!--404 page start here-->
+    <div class="not-found">
+        <div class="notfound-top">
+            <h1>401</h1>
+        </div>
+        <div class="content">
+            <br/>&nbsp;<br/>&nbsp;<br/>
+            <img src="{{ url_for('static', filename='images/green.png') }}" alt="" title="">
+
+            <br/>
+            <h3>Sorry, you do not have authority to operation this page, please connect admin to active!</h3>
+            <br/>
+
+           <a href="/serverinfo" style="color:white;"> <span class="BackToHome">Back To Home</span></a>
+
+        </div>
+      <div class="clear"> </div>
+    </div>
+    <div class="copyright">
+        <p>© 2018 Foxconn Creative. All rights reserved | Design by  <a href="#" style="cursor:text; color:white;">W3layouts</a></p>
+    </div>
+    <!--404 page end here-->
+</body>
+</html>
