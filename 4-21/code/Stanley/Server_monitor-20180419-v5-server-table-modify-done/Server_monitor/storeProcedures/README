@@ -1,2 +1,0 @@
-Command example:
-mysql --user=root --password=dc2018_BMC  < procShowDB.sql
