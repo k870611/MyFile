@@ -1,0 +1,6 @@
+http://pydev.org
+http://www.jython.org/jythonbook/en/1.0/JythonIDE.html
+http://amazeui.github.io/tagsinput/
+http://www.jq22.com/jquery-info426
+https://www.jb51.net/article/86920.htm
+http://www.jq22.com/jquery-info426
