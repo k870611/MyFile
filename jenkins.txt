@@ -1,0 +1,12 @@
+http://mirror.xmission.com/jenkins/plugins/
+http://updates.jenkins-ci.org/download/plugins/
+
+
+Extended+Choice+Parameter+plugin
+
+https://blog.csdn.net/jmyue/article/details/9376237
+https://wiki.jenkins.io/display/JENKINS/Extended+Choice+Parameter+plugin
+https://plugins.jenkins.io/extended-choice-parameter
+
+
+
