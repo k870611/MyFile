@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: com.main.RunProject
-Class-Path: lib/bcprov-jdk15-133.jar
-    lib/javabase64-1.3.1.jar
-    lib/jython.jar
