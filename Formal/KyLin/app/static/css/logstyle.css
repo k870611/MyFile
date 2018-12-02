@@ -1,0 +1,325 @@
+thead{
+	height: 40px;
+}
+
+tfoot{
+	height: 40px;
+}
+
+.TopNavBar {
+	background: url(../img/bg1.png);
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	overflow: hidden;
+}
+
+.SecondNavBar {
+	background-color: #112347;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	overflow: hidden;
+}
+
+.SideNavBar {
+	background-color: #0b172d;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.NavLi1 {
+	font-family: "Microsoft JhengHei", "PMingLiU";
+	font-size: 18px;
+	font-weight: bold;
+	color: #EEEEEE;
+	float: left;
+	padding: 10px;
+}
+
+.NavLi2 {
+	font-family: "Microsoft JhengHei", "PMingLiU";
+	font-size: 18px;
+	font-weight: bold;
+	color: #EEEEEE;
+	float: right;
+	padding: 10px;
+}
+
+.anchor {
+	color: #e5e5e5;
+	text-decoration: none;
+}
+
+.MainTable {
+	width: 100%;
+	height: calc(100% -  120px);
+	border-collapse: separate;
+	border: groove 2px Black;
+	min-width: 1163px;
+}
+
+.MainTable tbody {
+	display: block;
+}
+
+.MainTable thead tr {
+	display: block;
+}
+
+.MainTable tbody {
+	height: calc(100% - 5px);
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.MainTable td {
+	padding: 10px;
+}
+
+.MainTable tr td:nth-child(1) {
+	font-size: 15px;
+	padding-left: 10px;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 125px;
+	max-width: 125px;
+	min-width: 125px;
+}
+
+.MainTable tr td:nth-child(2) {
+	font-size: 15px;
+	padding-left: 10px;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 160px;
+	max-width: 160px;
+	min-width: 160px;
+}
+
+.MainTable tr td:nth-child(3) {
+	text-align: left;
+	padding-left: 10px;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 100px;
+	max-width: 100px;
+	min-width: 100px;
+}
+
+.MainTable tr td:nth-child(4) {
+	text-align: left;
+	padding-left: 10px;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 315px;
+	max-width: 315px;
+	min-width: 315px;
+}
+
+.MainTable tr td:nth-child(5) {
+	text-align: left;
+	padding-left: 10px;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 150px;
+	max-width: 150px;
+	min-width: 150px;
+}
+
+.MainTable tr td:nth-child(6) {
+	text-align: left;
+	padding: 10px;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 125px;
+	max-width: 125px;
+	min-width: 125px;
+}
+
+.MainTable tfoot tr td button {
+	color: #8d8ba0;
+	font-size: 18px;
+	background: #406ba5;
+	border-color: #406ba5;
+	border-radius: 5px;
+}
+
+.MainTable tfoot tr td button:hover {
+	cursor: pointer;
+	color: white;
+	font-size: 18px;
+	background: #406ba5;
+	border-color: #406ba5;
+	border-radius: 5px;
+}
+
+#AccTable tbody tr:hover td {
+	background:#1b4a69;
+	border-color:#1b4a69;
+}
+
+.tbAdvancedSearch {
+	font-family: "Microsoft JhengHei", "PMingLiU";
+	color: black;
+	width: 100%;
+	border-collapse: separate;
+	border: groove 0px #b4b7c6;
+}
+
+.tbAdvancedSearch td {
+	padding: 10px;
+	border-spacing: 10px;
+}
+
+.circle {
+	width: 25px;
+	height: 25px;
+	font-size: 15px;
+	background-color: red;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	text-align: center;
+	color: white;
+}
+
+.btnRightNav {
+	margin-left: 10px;
+	padding: 5px;
+	background: #183368;
+	border-color: #183368;
+	border-radius: 5px;
+	width: 40px;
+	height: 40px;
+}
+
+.btnRightNav:focus,.btnRightNav img:hover {
+	cursor: pointer;
+}
+
+.close {
+	float: right;
+	position: relative;
+	top: -5px;
+	right: 10px;
+	border: 0px;
+}
+
+.AdvancedSearchDialog {
+	position: absolute;
+	top: calc(50% - 305px);
+	left: 30%;
+	width: 600px;
+	height: 593px;
+	border: 1px solid #3f4757;
+	z-index: 300;
+	background-color: #1a1e21;
+	padding-top: 15px;
+	color: #bad0d5;
+	font-weight: bold;
+	font-size: 18px;
+	display: none;
+}
+
+.AdvancedSearchDialogComment {
+	height: 60px;
+	width: 585px;
+	background-color: #cfd7f0;
+	border-color: #cfd7f0;
+	margin: 10px 5px 0 5px;
+	padding-top: 10px;
+	padding-left: 15px;
+	font-size: 15px;
+}
+
+.AdvancedSearchDialog button {
+	background: #2c73b9;
+	border-color: #2c73b9;
+	color: white;
+	border-radius: 5px;
+	font-size: 15px;
+	width: 100px;
+	height: 30px;
+	float: right;
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+.AdvancedSearchDialog button:hover {
+	cursor: pointer;
+}
+
+.main-sidebar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	min-height: 100%;
+	width: 230px;
+	background-color: #222d32;
+	font-family: '微軟正黑體', '新細明體';
+	font-size: 15px;
+}
+
+.GoToOther {
+	color: #788ca8;
+	border-radius: 3px;
+	font-size: 15px;
+	font-weight: bold;
+	height: 20px;
+	padding: 5px 5px 0px 5px;
+}
+
+.GoToOther a {
+	color: #788ca8;
+}
+
+.GoToOther:hover {
+	color: white;
+	background-color: #00b4ef;
+	border-radius: 3px;
+	font-size: 15px;
+	font-weight: bold;
+	height: 20px;
+	padding: 5px 5px 0px 5px;
+}
+
+.GoToOther a:hover {
+	color: white;
+}
+
+@media screen and (max-height: 805px) {
+    .AdvancedSearchDialog {
+        position: absolute;
+        top: calc(403px - 305px);
+        left: 30%;
+        width: 600px;
+        height: 593px;
+        border: 1px solid #3f4757;
+        z-index: 300;
+        background-color: #1a1e21;
+        padding-top: 15px;
+        color: #bad0d5;
+        font-weight: bold;
+        font-size: 18px;
+        display: none;
+    }
+}

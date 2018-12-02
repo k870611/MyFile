@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/eventlistlayout.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/eventliststyle.css') }}">
+
+
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/screenfull.js') }}"></script>
+
+	<script type=text/javascript>
+		$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+	  	var csrf_token = $('meta[name=csrf-token]').attr('content');
+
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+					xhr.setRequestHeader("X-CSRFToken", csrf_token)
+				}
+			}
+		});
+	</script>
+
+<title>中央管理系統(CMS)</title>
+</head>
+
+<body style="max-height:calc(100% - 5px); overflow-y:hidden">
+<div id="Loading" style="z-index:1000; width:100%; height:100%; background:#e5e5e5; position:fixed; top:0px; left:0px; opacity:0.5; display:none">
+	<img id="load" src="{{ url_for('static', filename='img/loading.jpg') }}" style='position:absolute; left:40%; top:40%; height:300px; z-index:1000;'/>
+</div>
+<div id="BlockWindow" style="z-index:100; width:100%; height:100%; background:#e5e5e5; position:fixed; top:0px; left:0px; opacity:0.5; display:none;"></div>
+
+<div class="wrapper">
+	<header>
+		<!--導航列-->
+		{% include 'HeadNav.html' %}
+		<!--end 導航列-->
+		<ul class="SecondNavBar">
+			<li class="NavLi1"><div style="color:black; border-radius: 3px; font-size:15px; font-weight: bold; height:20px; padding:5px 5px 0px 5px;"><a href="/serverinfo" class="anchor" style="color:#788ca8">服务器列表</a></div></li>
+			<li class="NavLi1"><div style="color:white;background-color:#00b4ef; border-radius: 3px; font-size:15px; font-weight: bold; height:20px; padding:5px 5px 0px 5px;"><a href="#" class="anchor">事件列表</a></div></li>
+		</ul>
+	</header><!-- .header-->
+
+	<div class="middle">
+
+		<aside class="left-sidebar">
+
+			<ul class="SideNavBar" style="background-color: #484e68;">
+				<li class="NavLi1">
+					<div>
+						<button class="btnleftNav" onclick="location.href='#'" style="margin-left: 10px;">
+							<i class="fa fa-exclamation-triangle" style="color:white; height:20px; width:20px;"></i>告警事件
+						</button>
+
+						<!--
+						<button class="btnleftNav" onclick="location.href='/eventlist'"><i class="fa fa-th" style="color:white; height:20px; width:20px;"></i>所有事件</button>
+						<button class="btnleftNav" onclick="location.href='/eventDevice'"><i class="fa fa-window-restore" style="color:white; height:20px; width:20px;"></i>設備事件</button>
+
+						<button class="btnleftNav" onclick="location.href='/eventSystem'"><img src="{{ url_for('static', filename='img/computer.png') }}" style="color:white; height:20px; width:20px; position:absolute; top:16px; left:385px;"/>系統事件</button>
+						<button class="btnleftNav" onclick="location.href='/eventNow'"><img src="{{ url_for('static', filename='img/aim.png') }}" style="color:white; height:30px; width:30px; position:absolute; top:10px; left:505px;"/>當下事件</button>-->
+					</div>
+					<div style="background-color: #183368;">
+
+					</div>
+				</li>
+			</ul>
+
+			<ul class="SideNavBar">
+				<li class="NavLi1">
+					<div>
+						事件群组：
+						<select id="selectEventSearch" style="border-color:#5d6980;background-color:#5d6980; color:white; width:150px;height:26px; font-family:'微軟正黑體', '新細明體'; font-size:15px;">
+							{% if filter == '' %}
+								<option value ='' selected>所有事件</option>
+								<option value ='system'>系统事件</option>
+								<option value="equipment">设备事件</option>
+
+							{% elif filter == 'system' %}
+								<option value =''>所有事件</option>
+								<option value ='system' selected>系统事件</option>
+								<option value="equipment">设备事件</option>
+
+							{% elif filter == 'equipment' %}
+								<option value =''>所有事件</option>
+								<option value ='system'>系统事件</option>
+								<option value="equipment" selected>设备事件</option>
+							{% endif %}
+						</select>
+						事件來源：
+						<input id="textEventSearch" type="text" value="{{value}}" onkeyup="sqlcheck(this)" style="border-color:#5d6980;background-color:#5d6980; color:white; width:150px;height:26px; font-family:'微軟正黑體', '新細明體'; font-size:15px;">
+
+						<button id="btnEventSearch" style="border-color:#0b172d; background-color:#0b172d; border-radius:3px; font-size:15px; color:white;cursor:pointer;">过滤</button>
+					</div>
+				</li>
+			</ul>
+
+			<table class="MainTable" border="1">
+				<thead style="background:#222e46; color:white; font-family:'微軟正黑體', '新細明體'; font-size:14px;" align="left" >
+					<tr>
+						<td style="border-right:groove 2px white;">警报等级</td>
+						<td style="border-right:groove 2px white;">事件来源</td>
+						<td style="border-right:groove 2px white;">事件描述</td>
+						<td style="border-right:groove 2px white;">发生时间</td>
+						<td style="border-right:groove 2px white;">详细</td>
+						<td style="border-right:groove 2px white;">处理状况</td>
+					</tr>
+				</thead>
+
+				<tbody style="background:#293155; color:white; font-family:'微軟正黑體', '新細明體';">
+					{% for event in EventList %}
+					<tr>
+						<td>
+							{% if event.level == 'low'%}
+								<span style="background:white;">{{event.level}}</span>
+
+							{% elif event.level == 'middle'%}
+								<span style="background:yellow;">{{event.level}}</span>
+
+							{% elif event.level == 'high'%}
+								<span style="background:red;">{{event.level}}</span>
+
+							{% endif%}
+						</td>
+
+						<td>{{event.name}}</td>
+						<td>{{event.description}}</td>
+						<td>
+							<p>{{event.time}}</p>
+						</td>
+
+						<td>
+							<button onclick="openItem('AdvancedSearchDialog')">查看</button>
+							<button class="dropbtnList">三</button>
+						</td>
+						<td>
+							<button onclick="openItem('HintDialog')">编辑</button>
+							<input type="hidden" value="{{event.server_id}}">
+							<input type="hidden" value="{{event.sel_save_list_id}}">
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+				<tfoot style="height:40px;">
+					<tr>
+						<td colspan="6" style="background:#0b172d; color:white; font-family:'微軟正黑體', '新細明體';">
+
+
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</aside><!-- .left-sidebar -->
+
+	</div><!-- .middle-->
+</div><!-- .wrapper -->
+
+<div id="AdvancedSearchDialog" class="AdvancedSearchDialog">
+	&nbsp;&nbsp;Sel List
+	<a href="javascript: closeItem('AdvancedSearchDialog');"><i class="fa fa-close fa-lg close" style="color:white; height:20px; width:20px;"></i></a>
+
+	<div class="AdvancedSearchDialogComment" style="position:relative; top:5px; left:-5px; max-height:650px; height:auto;">
+		<div style="background:inherit; width:500px; min-height:550px; margin:0px 20px 20px 35px; height:auto;">
+			<table id="tbSelGet01" class='tbAdvancedSearch' style="margin-top: 10px;">
+				<thead style="height:10px;">
+					<tr><td></td></tr>
+				</thead>
+
+				<tbody></tbody>
+				<!--<tr>
+						<td>SEL Record ID:</td>
+						<td>
+							0001
+						</td>
+					</tr>
+
+					<tr>
+						<td>Record Type:</td>
+						<td>
+							02
+						</td>
+					</tr>
+
+					<tr>
+						<td>Timestamp:</td>
+						<td>
+							03/28/2018 07:39:43
+						</td>
+					</tr>
+
+					<tr>
+						<td>Generator ID:</td>
+						<td>
+							0020
+						</td>
+					</tr>
+
+					<tr>
+						<td>EvM Revision:</td>
+						<td>
+							04
+						</td>
+					</tr>
+
+					<tr>
+						<td>Sensor Type:</td>
+						<td>
+							Event Logging Disabled
+						</td>
+					</tr>
+
+					<tr>
+						<td>Sensor Number:</td>
+						<td>
+							a8
+						</td>
+					</tr>
+
+					<tr>
+						<td>Event Type:</td>
+						<td>
+							Sensor-specific Discrete
+						</td>
+					</tr>
+
+					<tr>
+						<td>Event Direction:</td>
+						<td>
+							Assertion Event
+						</td>
+					</tr>
+
+					<tr>
+						<td>Event Data (RAW):</td>
+						<td>
+							02ffff
+						</td>
+					</tr>
+
+					<tr>
+						<td>Event Interpretation:</td>
+						<td>
+							Missing
+						</td>
+					</tr>
+
+					<tr>
+						<td>Description:</td>
+						<td>
+							Log area reset/cleared
+						</td>
+					</tr>
+
+					<tr>
+						<td>Sensor ID:</td>
+						<td>
+							SEL_Status (0xa8)
+						</td>
+					</tr>
+
+					<tr>
+						<td>Entity ID:</td>
+						<td>
+							7.32
+						</td>
+					</tr>
+
+					<tr>
+						<td>Sensor Type (Discrete):</td>
+						<td>
+							Event Logging Disabled
+						</td>
+					</tr>-->
+
+
+				<tfoot>
+					<tr><td></td></tr>
+				</tfoot>
+			</table>
+			<br/>
+		</div>
+	</div>
+</div>
+
+
+<div id="ListDialog" class="ListDialog">
+	&nbsp;&nbsp;
+	<a href="javascript: closeItem('ListDialog');"><i class="fa fa-close fa-lg close" style="color:white; height:20px; width:20px;"></i></a>
+	<a href="#"><img src="{{ url_for('static', filename='img/gotop.png') }}" style="height:30px; width:30px; position:absolute; top:3px; right:30px;" onclick="ScrollGoToTop()"/></a>
+
+	<div style="position:relative; top:10px; left:5px; height:96%;">
+		<table id="tbList" class="tbList" border="1">
+
+			<thead style="background:#222e46; color:white; font-family:'微軟正黑體', '新細明體'; font-size:14px;" align="left" >
+				<tr>
+					<td>RecId</td>
+					<td>日期</td>
+					<td>时间</td>
+					<td>事件名称</td>
+					<td>描述</td>
+					<td>事件种类</td>
+				</tr>
+			</thead>
+
+			<tbody style="background:#293155; color:white; font-family:'微軟正黑體', '新細明體';">
+				<!--
+				<tr>
+					<td>1</td>
+					<td>03/28/2018</td>
+					<td>07:39:43</td>
+					<td>Event Logging Disabled #0xa8</td>
+					<td>Log area reset/cleared</td>
+					<td>Asserted</td>
+				</tr>
+
+				<tr>
+					<td>2</td>
+					<td>03/28/2018</td>
+					<td>09:15:21</td>
+					<td>System Boot Initiated #0xc3</td>
+					<td></td>
+					<td>Asserted</td>
+				</tr>
+
+
+   				<tr>
+					<td>3</td>
+					<td>03/28/2018</td>
+					<td>09:15:27</td>
+					<td>System Boot Initiated #0xe0</td>
+					<td>Initiated by warm reset</td>
+					<td>Asserted</td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div id="HintDialog" class="HintDialog">
+	&nbsp;&nbsp;註記
+	<a href="javascript: closeItem('HintDialog');"><i class="fa fa-close fa-lg close" style="color:white; height:20px; width:20px;"></i></a>
+
+	<div class="HintDialogComment">
+		<textarea style=" width:280px; font-size:18px; height:150px; color:white; background:#5d697d;"></textarea>
+	</div>
+
+	<button onclick="closeItem('HintDialog')" style="">取消</button>
+	<button id="btnHintDialogOK">儲存</button>
+</div>
+
+<script>
+/*MainTable hovor and click-------------------------------------------------------------------*/
+	var btnClick = false;
+	var my_btn = '';
+
+	$(".MainTable tbody tr").click(function(){
+
+		if($(this).hasClass("HaveLoadData") && btnClick){
+			document.getElementById(my_btn).style.display = 'block';
+			$('#BlockWindow').show();
+		}
+
+	    if($(this).hasClass("HaveLoadData")){
+			return;
+		}
+
+		$(".MainTable tbody tr").css("background","#293155");
+		$(this).css("background","#5c6086");
+
+		$(".MainTable tbody tr").each(function(){
+			var active = $(this).hasClass("TheActivedTr");
+
+			if(active){
+				$(this).removeClass("TheActivedTr");
+			}
+
+			active = $(this).hasClass("HaveLoadData");
+
+			if(active){
+				$(this).removeClass("HaveLoadData");
+			}
+		});
+
+		$(this).addClass("TheActivedTr");
+
+		var server_id = $('.TheActivedTr :hidden:eq(0)').val();
+		var sel_id = $('.TheActivedTr :hidden:eq(1)').val();
+		var sel_name = $('.TheActivedTr td:eq(1)').text();
+
+		if (btnClick && (my_btn == 'ListDialog' || my_btn == 'AdvancedSearchDialog' || my_btn == 'HintDialog')){
+			$('#Loading').show();
+
+			$.ajax({
+				type : "POST",
+				url : $SCRIPT_ROOT + "/GetAlarmInfo",
+				data : {
+					server_id: server_id,
+					sel_name : sel_name,
+					sel_id : sel_id
+				},
+				cache : false,
+				success : function(data) {
+
+					/*if(data.Success == 'Fail'){
+						alert(data.info);
+						$('#Loading').hide();
+						return;
+					}*/
+
+					//Load Sel get 01-----------------------------------------------------------------------
+					var arySel = data.sel_get
+					$('#tbSelGet01 tbody').html('');
+
+					for(idx in arySel){
+						$('#tbSelGet01 tbody').append("<tr><td>"+arySel[idx].name+" : </td><td>"+
+						arySel[idx].value+"</td></tr>")
+					}
+
+					//Load Sel----------------------------------------------------------------------------
+					var arySel = data.serverSel
+					$('#tbList tbody').html('');
+					for(idx in arySel){
+						$('#tbList tbody').append("<tr><td>"+arySel[idx].sel_id+"</td><td>"+
+						arySel[idx].date+"</td><td>" +
+						arySel[idx].hour+"</td><td>"+
+						arySel[idx].sel_name+"</td><td>"+
+						arySel[idx].condition+"</td><td>"+
+						arySel[idx].assert_tag+"</td></tr>")
+					}
+
+					//Load Edit Info--------------------------------------------------------------------
+					note = data.sel_note
+					$('.HintDialogComment textarea').val(note);
+
+					btnClick = false;
+
+					document.getElementById(my_btn).style.display = 'block';
+					$('#BlockWindow').show();
+					$('#Loading').hide();
+
+					$(".TheActivedTr").addClass("HaveLoadData");
+
+
+				},error : function(xhr, ajaxOptions, thrownError) {
+					console.log('error');
+
+					btnClick = false;
+
+					document.getElementById(my_btn).style.display = 'block';
+					$('#BlockWindow').show();
+					$('#Loading').hide();
+
+					$(".TheActivedTr").addClass("HaveLoadData");
+				}
+			});
+		}
+	});
+
+/*btnHintDialogOK---------------------------------------------------------------*/
+	$('#btnHintDialogOK').click(function(){
+		var server_id = $('.TheActivedTr :hidden:eq(0)').val();
+		var sel_id = $('.TheActivedTr :hidden:eq(1)').val();
+		var sel_name = $('.TheActivedTr td:eq(1)').text();
+		var text = $('.HintDialogComment textarea').val();
+
+		$.ajax({
+			type : "POST",
+			url : $SCRIPT_ROOT + "/ChangeSelNote",
+			data : {
+				server_id : server_id,
+				sel_id : sel_id,
+				sel_name : sel_name,
+				text : text
+			},
+			cache : false,
+			success : function(data) {
+				if(data.Success == 'True'){
+					alert('Update Success');
+					window.location.href = ('/eventlist');
+
+				}else{
+					alert('Error');
+					return;
+				}
+			},
+
+			error : function(xhr, ajaxOptions, thrownError) {
+				console.log('error');
+			}
+		});
+	});
+
+	/*btnEventSearch---------------------------------------------------------------*/
+	$('#btnEventSearch').click(function(){
+		var select = $('#selectEventSearch').val();
+		var text = $('#textEventSearch').val();
+
+		console.log(select+text)
+
+		window.location.href = ('/EventSearch?filter='+select+'&value='+text);
+	});
+
+/*Document---------------------------------------------------------------*/
+
+	$(document).ready(function(){
+		var ShowInfo = "{{ShowInfo}}"
+
+		if(ShowInfo == "all"){
+			$('.btnleftNav:eq(0)').css('background','#8bc35d')
+			$('.btnleftNav:eq(0)').css('border-color','#8bc35d')
+		}
+
+		var DateTime = GetDateTime();
+		var leftRowCount = 0;
+
+		$('.MainTable tbody tr').each(function(){
+			leftRowCount +=1;
+		});
+
+		$('.MainTable tfoot tr td').text('总笔数：'+leftRowCount+'笔 更新时间：'+ DateTime)
+	});
+
+/*GetDateTime-------------------------------------------------------------------*/
+	function GetDateTime(){
+		var d=new Date();
+		var month=d.getMonth()+1;
+		var day = d.getDate();
+		var hour = d.getHours();
+		var min = d.getMinutes();
+		var second = d.getSeconds();
+
+		if(month<10)
+			month = "0"+month;
+
+		if(day<10)
+			day = "0"+day;
+
+		if(hour<10)
+			hour = "0"+hour;
+
+		if(min<10)
+			min = "0"+min;
+
+		if(second<10)
+			second = "0"+second;
+
+		var val = d.getFullYear()+"-"+month+"-"+day+" "+hour+":"+min+":"+second;
+		return val;
+	};
+
+	$('.dropbtnList').click(function(){
+		openItem('ListDialog');
+	});
+
+/*Support Function-------------------------------------------*/
+	function openItem(obj) {
+		btnClick = true;
+		my_btn = obj;
+
+		if(obj == 'ListDialog' || obj == 'AdvancedSearchDialog' || obj == 'HintDialog'){
+			$('#ListDialog table tbody').scrollTop(0);
+			return;
+		}
+
+		document.getElementById(obj).style.display = 'block';
+		$('#BlockWindow').show();
+	}
+
+	function closeItem(obj) {
+		document.getElementById(obj).style.display = 'none';
+		$('#BlockWindow').hide();
+	}
+
+	$('#BlockWindow').click(function(){
+		closeItem('AdvancedSearchDialog');
+		closeItem('ListDialog');
+		closeItem('HintDialog');
+	});
+
+	function ScrollGoToTop(){
+		$('#ListDialog table tbody').animate({scrollTop:0},900);
+		return false;
+	}
+
+	function sqlcheck(obj){
+		obj.value = obj.value.replace( /(--|\t|\n|\r|\;)/g,"");
+	}
+
+/*fullScreen-------------------------------------------------------------------*/
+	var FullScreen = false;
+	$('#fullScreen').click(function() {
+		if (screenfull.enabled && !FullScreen) {
+			FullScreen = true;
+			screenfull.request();
+
+		}else if(screenfull.enabled && FullScreen){
+			FullScreen = false;
+			screenfull.exit();
+		}
+	});
+
+</script>
+
+</body>
+
+</html>

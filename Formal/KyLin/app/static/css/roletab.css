@@ -1,0 +1,203 @@
+.tab-wrapper html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
+	{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline
+}
+
+.tab-wrapper {
+	font-family: Arial, sans-serif;
+	line-height: 1.5;
+	margin-left:5px;
+}
+
+.tab-menu li {
+	border-radius:3px;
+	position: relative;
+	background-color: #5b6a76;
+	color: #d3e0f0;
+	display: inline-block;
+	padding: 12px 15px 2px 18px;
+	opacity: 0.8;
+	cursor: pointer;
+	z-index: 0;
+	font-size: 20px;
+}
+
+.tab-menu li:hover {
+	color: #0e192e;
+}
+
+.tab-menu li.active {
+	background: #cdd7e8;
+	color:#0e192e;
+	opacity: 1;
+}
+
+.tab-menu li.active:hover {
+	color: #464646;
+}
+
+.tab-content>div {
+	background-color: #174c78;
+	box-sizing: border-box;
+	width: 100%;
+	height:100%;
+}
+
+.line {
+	position: absolute;
+	width: 0;
+	height: 7px;
+	top: 0;
+	left: 0;
+}
+
+.btnTab1Nav{
+	background:#417fcc; 
+	font-size:15px; 
+	color:white; 
+	margin:8px 0px 0px 20px; 
+	border-radius:5px; 
+	padding:4px 8px 2px 8px;
+}
+
+.btnTab1Nav:hover{
+	cursor:pointer;
+	background:#417fcc; 
+	font-size:15px; 
+	color:white; 
+	margin:8px 0px 0px 20px; 
+	border-radius:5px; 
+	padding:4px 8px 2px 8px;
+}
+
+.tbTab1Info{
+	width:100%; 
+	height:calc(100% - 40px);
+	border-collapse:separate; 
+	border:groove 0px Black; 
+}
+
+.tbTab1Info td{
+/*cellpadding="10px" cellspacing="5px"*/
+	border-spacing:10px;
+}
+
+.tbTab1Info tbody tr td:nth-child(1){
+	/*49*/
+	width:55px;
+	min-width:55px;
+	max-width: 55px;
+	text-align:center;
+	border-bottom:groove 1px #4488cc; 
+	vertical-align: bottom;
+}
+
+.tbTab1Info tbody tr td:nth-child(2){
+	font-size:15px;
+	padding:8px 0px 8px 10px;
+	text-align:left;
+	text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
+	/*291*/
+	width:340px;
+	min-width:340px;
+	max-width: 340px;
+	border-bottom:groove 1px #4488cc; 
+}
+
+.tbTab1Info tbody tr td:nth-child(3){
+	text-align:left;
+	padding:8px 0px 8px 10px;
+	font-size:15px;
+	text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
+	/*286*/
+	width:340px;
+	min-width:340px;
+	max-width: 340px;
+	border-bottom:groove 1px #4488cc; 
+}
+
+.tbTab1Info tfoot tr td button{
+	color:#8d8ba0;
+	font-size:18px; 
+	background:#406ba5; 
+	border-color:#406ba5; 
+	border-radius:5px;
+}
+
+.tbTab1Info tfoot tr td button:hover{
+	cursor:pointer;
+	color:white;
+	font-size:18px; 
+	background:#406ba5; 
+	border-color:#406ba5; 
+	border-radius:5px;
+}
+
+
+.tbTabDataMaintenanceModify{
+	width:auto; 
+	border-collapse:separate; 
+	border:groove 0px Black; 
+}
+
+.tbTabDataMaintenanceModify td{
+/*cellpadding="10px" cellspacing="5px"*/
+	border-spacing:10px;
+}
+
+.tbTabDataMaintenanceModify tbody tr td:nth-child(1){
+	padding-top:3px;
+	text-align:center;
+	width:45px; 
+	min-width:45px; 
+	max-width: 45px;
+	border-bottom:groove 1px #fdfdfd; 
+}
+
+.tbTabDataMaintenanceModify tbody tr td:nth-child(2){
+	font-size:15px;
+	padding:5px 0px 5px 10px;
+	text-align:left;
+	text-overflow: ellipsis; overflow: hidden; white-space: nowrap; 
+	width:251px;
+	min-width:251x; 
+	max-width: 251px;
+	border-bottom:groove 1px #fdfdfd;
+}
+
+.tbTabDataMaintenanceModify tbody tr td:nth-child(3){
+	text-align:left;
+	padding:5px 0px 5px 0px;
+	font-size:15px;
+	text-overflow: ellipsis; overflow: hidden; white-space: nowrap; 
+	width:251x;
+	min-width:251x; 
+	max-width: 251px;
+	border-bottom:groove 1px #fdfdfd;
+}
+
+.tbTabDataMaintenanceModify tfoot tr td button{
+	width:auto;
+	color:#8d8ba0;
+	font-size:18px; 
+	background:#406ba5; 
+	border-color:#406ba5; 
+	border-radius:5px;
+	margin:0px;
+}
+
+.tbTabDataMaintenanceModify tfoot tr td button:hover{
+	cursor:pointer;
+	color:white;
+	font-size:18px; 
+	background:#406ba5; 
+	border-color:#406ba5; 
+	border-radius:5px;
+	width:auto;
+	margin:0px;
+}

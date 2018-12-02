@@ -1,0 +1,14 @@
+<script type="text/javascript" src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+<script>
+$(document).ready(function(){
+    var socket = io.connect('http://' + document.domain + ':' + location.port + '/connectToSystem');
+});
+</script>
+
+<ul class="TopNavBar" style="min-width:800px;">
+    <li class="NavLi1"><h1>Central Management System</h1></li>
+
+    <li class="NavLi2"><a href="#" class="anchor"><i id="fullScreen" class="fa fa-arrows-alt"></i></a></li>
+    <li class="NavLi2"><a href="/logout" class="anchor"><i class="fa fa-sign-out"></i></a></li>
+    <li class="NavLi2" ><a href="#" class="anchor">a&nbsp; <span class="circle" style="width:19px; height:19px; display:inline-block;">{{CountEventNow}}</span></a></li>
+</ul>

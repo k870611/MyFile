@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/loglayout.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/logstyle.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar-menu.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/datepicker.min.css') }}">
+
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/sidebar-menu.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/datepicker.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/datepicker.en.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/screenfull.js') }}"></script>
+
+<title>中央管理系統(CMS)</title>
+</head>
+
+<body>
+
+<div id="BlockWindow" style="z-index:100; width:100%; height:100%; background:#e5e5e5; position:fixed; top:0px; left:0px; opacity:0.5; display:none;"></div>
+<div class="wrapper">
+	<header>
+		<!--導航列-->
+		{% include 'HeadNav.html' %}
+		<!--end 導航列-->
+		<ul class="SecondNavBar">
+			<li class="NavLi1"><div class="GoToOther"><a href="/serverinfo" class="anchor" >服务器列表</a></div></li>
+			<li class="NavLi1"><div class="GoToOther"><a href="/eventlist" class="anchor">事件列表</a></div></li>
+		</ul>
+	</header><!-- .header-->
+
+	<div class="middle">
+
+		<aside class="left-sidebar"> 
+			<aside class="main-sidebar">
+				<section  class="sidebar">
+					<ul class="sidebar-menu">
+				      
+				      	<li class="treeview">
+					        <a href="#">
+					          	<span>成员</span> <i class="fa fa-toggle-up pull-right"></i>
+					        </a>
+					        <ul class="treeview-menu">
+					        	<li>&nbsp;</li>
+						    	<li><a href="/accmanagement"><i class="fa fa-chevron-right"></i> 账户管理</a></li>
+						  		<li><a href="/role"><i class="fa fa-chevron-right"></i> 角色管理</a></li>
+						   		<li><a href="/online"><i class="fa fa-chevron-right"></i> 在线成员</a></li>
+					        	<li>&nbsp;</li>
+					        </ul>
+				      	</li>
+				      
+						<li class="treeview">
+							<a href="#">
+				           		<span>设备</span> <i class="fa fa-toggle-up pull-right"></i>
+							</a>
+				        	<ul class="treeview-menu" style="display: none;">
+				        		<li>&nbsp;</li>
+								<!--<li><a href="/itmanagement"><i class="fa fa-chevron-right"></i> IT Management</a></li>-->
+				        		<li><a href="/tankManagement"><i class="fa fa-chevron-right"></i> Tank 管理</a></li>
+								<li>&nbsp;</li>
+				        	</ul>
+				      	</li>
+				      
+						<li class="treeview active">
+							<a href="#">
+								<span>日志</span> <i class="fa fa-toggle-up pull-right"></i>
+					        </a>
+					        <ul class="treeview-menu">
+					        	<li>&nbsp;</li>
+								<li><a href="#"><i class="fa fa-chevron-right"></i> 系统日志</a></li>
+					        	<li>&nbsp;</li>
+					        </ul>
+				      	</li>
+			
+				    </ul>
+				</section>
+			</aside>
+		</aside><!-- .left-sidebar -->
+		
+		<aside class="right-sidebar">
+			<ul class="SideNavBar" id="rightNav" style="background-color:#004d74;">
+				<li class="NavLi1">
+					<div style="width:400px;">
+						<input type="image" src="{{ url_for('static', filename='img/log_search.png') }}" class="btnRightNav" onclick="openItem('AdvancedSearchDialog')" style="">
+					</div>
+				</li>
+			</ul>
+			
+			<ul class="SecondNavBar" style="background:#1a1e21;">
+				<li class="NavLi1"><div style="color:#bad0d5; border-radius: 3px; font-size:15px; font-weight: bold; height:20px; padding:5px 5px 0px 5px;">系统日志</div></li>
+			</ul>
+			
+			<table class="MainTable" border="1">
+				<thead style="background:#32688e; color:white; font-family:'微軟正黑體', '新細明體'; font-size:14px;" align="left" >
+					<tr style="font-size:15px;">
+						<td style="border-right:groove 1px #e3e3e3; padding:10px 9px 10px 9px;">部门</td>
+						<td style="border-right:groove 1px #e3e3e3; padding:10px 9px 10px 9px;">账户</td>
+						<td style="border-right:groove 1px #e3e3e3; padding:10px 9px 10px 10px;">日志等级</td>
+						<td style="border-right:groove 1px #e3e3e3; padding:10px 9px 10px 10px;">操作内容</td>
+						<td style="border-right:groove 1px #e3e3e3; padding:10px 9px 10px 10px;">操作时间</td>
+						<td style="border-right:groove 1px #e3e3e3; padding:10px 9px 10px 9px;">来源地址</td>
+					</tr>
+				</thead>
+				
+				<tbody style="background:#477a9c; color:white; font-family:'微軟正黑體', '新細明體';">
+					{% for info in log_list %}
+						<tr align="left">
+							<td>{{info.log_user_org}}</td>
+							<td>{{info.log_user_account}}</td>
+							<td>{{info.log_level}}</td>
+							<td>{{info.log_description}}</td>
+							<td>{{info.log_date}}</td>
+							<td>{{info.log_source}}</td>
+						</tr>
+					{% endfor%}
+				</tbody>
+				<tfoot style="background:#3d5074; color:white; font-family:'微軟正黑體', '新細明體'; font-size:14px; width:500px; padding:0px;" align="left" >
+					<tr>
+						<td colspan="7" style="padding:10px; text-align:left;">
+							{% if prev_url%}
+								<a href="{{prev_url}}&click=b" class="anchor">
+									<button>
+										<span style="position: relative; bottom:1px;">|</span><i class="fa fa-caret-left"></i>
+									</button>
+								</a>
+							{% else %}
+								<button>
+									<span style="position: relative; bottom:1px;">|</span><i class="fa fa-caret-left"></i>
+								</button>
+
+							{% endif%}
+
+							{% if prev_url%}
+								<a href="{{prev_url}}" class="anchor">
+									<button>
+										<i class="fa fa-caret-left"></i>
+									</button>
+								</a>
+							{% else %}
+								<button>
+									<i class="fa fa-caret-left"></i>
+								</button>
+							{% endif%}
+
+							页 <input type="text" value="{{ page }}" style="width:30px; text-align:center;" readonly> of {{pageTotal}}
+
+							{% if next_url%}
+								<a href="{{next_url}}" class="anchor">
+									<button>
+										<i class="fa fa-caret-right"></i>
+									</button>
+								</a>
+							{% else %}
+								<button>
+									<i class="fa fa-caret-right"></i>
+								</button>
+							{% endif%}
+
+							{% if next_url%}
+								<a href="{{next_url}}&click=e" class="anchor">
+									<button>
+										<i class="fa fa-caret-right"></i><span style="position: relative; bottom:1px;">|</span>
+									</button>
+								</a>
+							{% else %}
+								<button>
+									<i class="fa fa-caret-right"></i><span style="position: relative; bottom:1px;">|</span>
+								</button>
+							{% endif%}
+
+							<a style="color:white" onClick="window.location.reload()">
+								<button style="color:white; margin-left:10px;">
+									<i class="fa fa-repeat"></i>
+								</button>
+							</a>
+
+							<span style="float:right; padding:5px 15px 0px 0px;font-size:15px;">总共 : {{rowTotal}}, {{((page-1)*2)+1}}/{{rowTotal}}</span>
+						</td>
+					</tr>
+				</tfoot>
+			</table>					
+		</aside><!-- .right-sidebar -->
+	</div><!-- .middle-->
+</div><!-- .wrapper -->
+
+<div id="AdvancedSearchDialog" class="AdvancedSearchDialog">
+	&nbsp;&nbsp;进阶搜寻
+	<a href="javascript: closeItem('AdvancedSearchDialog');"><i class="fa fa-close fa-lg close" style="color:white; height:20px; width:20px;"></i></a>
+	
+	<div class="AdvancedSearchDialogComment" style="position:relative; top:5px; left:-5px; height:550px;">
+		<div style="background:inherit; width:500px; height:450px; margin:0px 20px 20px 35px;">
+			<table class='tbAdvancedSearch'>
+				<thead style="height:10px;">
+					<tr><td></td></tr>
+				</thead>
+				
+				<tr>
+					<td>部门:</td>
+					<td>
+
+						<select id="org" style="width:100%; height:100%; font-size:20px; border-color:#b4b7c6;">
+							<option selected value=""></option>
+							<option>预设部门1</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>模组:</td>
+					<td>
+						<select id="module" style="width:100%; height:100%; font-size:20px; border-color:#b4b7c6;">
+							<option selected value=""></option>
+							<option>服务器</option>
+							<option>事件</option>
+							<option>账户</option>
+							<option>角色</option>
+							<option>Tank</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>日志等级:</td>
+					<td>
+						<select id="level" style="width:100%; height:100%; font-size:20px; border-color:#b4b7c6;">
+							<option selected value=""> </option>
+							<option>INFO</option>
+							<option>Warning</option>
+							<option>Error</option>
+							<option>Critical</option>
+						</select>					
+					</td>
+				</tr>
+				
+				<tr>
+					<td>账户:</td>
+					<td><input value="{{arySearch[3]}}" id="account" type="text" style="width:100%; height:100%; font-size:20px; border-color:#b4b7c6;"/></td>
+				</tr>
+				
+				<tr>
+					<td>操作内容:</td>
+					<td><input value="{{arySearch[4]}}" id="description" type="text" style="width:100%; height:100%; font-size:20px; border-color:#b4b7c6;"/></td>
+				</tr>
+				
+				<tr>
+					<td>来源地址:</td>
+					<td><input value="{{arySearch[5]}}" id="source" type="text" style="width:100%; height:100%; font-size:20px; border-color:#b4b7c6;"/></td>
+				</tr>
+				
+				<tfoot>
+					<tr><td></td></tr>
+				</tfoot>			
+			</table>
+		</div>
+		
+		<div id="accDeadline" style="position:absolute; top:350px; left:80px; width:450px; color:black; ">
+			<table class="tbAdvancedSearch" style="border:groove 2px #e1e5ee; ">
+				<thead style="height:10px;">
+					<tr>
+						<td></td>
+					</tr>
+					
+				</thead>
+				<tr>
+					<td align="center">Since</td>
+					<td>
+						<input type="text" id="Since" style="width:130px; height:100%; font-size:20px; border-color:#b4b7c6;"/>
+						<input type="image" id="SinceImg" src="{{ url_for('static', filename='img/datepicker.png') }}" style="width:30px; height:27px; position:absolute; top:31px; left:213px; border:groove 1px #b4b7c6; ">
+					</td>
+					
+					<td>
+						<select id="SinceTime" style="width:150px; height:105%; font-size:20px; border-color:#b4b7c6;">
+							<option>00:00</option>
+							<option>12:00</option>
+							<option>18:00</option>
+							<option>23:59</option>
+						</select>
+
+						<!--<input id="SinceTime" type="time" value="00:00" style="width:150px; height:105%; font-size:20px; border-color:#b4b7c6; font-family:Arial, Helvetica, sans-serif;">-->
+					</td>
+				</tr>
+				<tr>
+					<td align="center">Until</td>
+					<td>
+						<input type="text" id="Until" style="width:130px; height:100%; font-size:20px; border-color:#b4b7c6;"/>
+						<input type="image" id="UntilImg" src="{{ url_for('static', filename='img/datepicker.png') }}" style="width:30px; height:27px; position:absolute; top:80px; left:213px; border:groove 1px #b4b7c6; ">
+					</td>
+					
+					<td>
+						<select id="UntilTime" style="width:150px; height:105%; font-size:20px; border-color:#b4b7c6;">
+							<option>00:00</option>
+							<option>12:00</option>
+							<option>18:00</option>
+							<option>23:59</option>
+						</select>
+					</td>
+				</tr>				
+			</table>	
+		</div>
+		
+		<span style="background-color: #cfd7f0; color:#467024; font-size:18px; font-weight: bold; position:absolute; top:340px; left:100px;">操作日期</span>
+		
+				
+		<button type="reset" style="margin-right:60px;">清除</button>
+		<button id="logSearchOk">搜寻</button>
+	</div>
+
+</div>
+
+<script>
+ 
+/*MainTable hovor and click-------------------------------------------------*/	
+	$("#AccTable tbody tr").click(function(){
+		if($(this).hasClass("TheActivedTr")){
+			return;
+		}
+		
+		$("#AccTable tbody tr").css("background","#477a9c");
+		$(this).css("background","#1b4a69");
+	
+		/* $("#AccTable tbody tr").each(function(){
+			var active = $(this).hasClass("TheActivedTr");
+			
+			if(active){
+				$(this).removeClass("TheActivedTr");
+			}
+		});
+
+		$(this).addClass("TheActivedTr"); */
+	});
+/*MainTable hovor and click End-------------------------------------------*/
+
+	$('#logSearchOk').click(function(){
+		var org = $('#org').val();
+		var module = $('#module').val();
+		var level = $('#level').val();
+		var account = $('#account').val();
+		var description = $('#description').val();
+		var source = $('#source').val();
+		var since = $('#Since').val();
+		var sinceTime = $('#SinceTime').val();
+		var until = $('#Until').val();
+		var untilTime = $('#UntilTime').val();
+
+		if(org == null){
+			org =''
+		}
+
+		if(module == null){
+			module=''
+		}
+
+		if(level == null){
+			level=''
+		}
+
+		if(since.trim() == '' || since == null){
+			since = '1900-01-01'
+		}
+
+		if(until.trim() == '' || until == null){
+			until = '3000-12-31'
+		}
+
+
+		/*if(sinceTime.trim() == '' || since == null){
+			sinceTime = '00:00'
+		}
+
+		if(untilTime.trim() == '' || since == null){
+			untilTime = '00:00'
+		}*/
+
+		window.location.href = ("/logSearch?org="+org+
+												"&module="+module+
+												"&level="+level+
+												"&account="+account+
+												"&description="+description+
+												"&source="+source+
+												"&since="+since+
+												"&sinceTime="+sinceTime+
+												"&until="+until+
+												"&untilTime="+untilTime);
+	});
+
+	$(document).ready(function(){
+	/*Load Search Date ----------------------------------------------*/
+		$('#org').val('{{arySearch[0]}}');
+		$('#module').val('{{arySearch[1]}}');
+		$('#level').val('{{arySearch[2]}}');
+
+	/*Advanced Search DatePicker ----------------------------------------------*/
+		$('#Since').datepicker({
+			language: "en", 
+			dateFormat : 'yyyy-mm-dd', 
+			maxDate:new Date(),
+			autoClose:true,
+			onSelect: function onSelect(date) {
+
+				if($('#Until').val() == ''){
+					$('#Until').val(date);
+				}
+
+				var date_from=new Date(date);
+				var date_to = new Date($('#Until').val());
+				var days = date_to - date_from;
+
+				if(days<0){
+					alert('日期错误');
+					$('#Until').val(addDate($('#Since').val(), 1));
+				}
+		    }
+		});
+		
+		$('#SinceImg').datepicker({ 
+			language: "en", 
+			dateFormat : 'yyyy-mm-dd', 
+			maxDate:new Date(),
+			autoClose:true,
+			onSelect: function onSelect(date) {
+				$('#Since').val(date);
+
+				if($('#Until').val() == ''){
+					$('#Until').val(date);
+				}
+
+				var date_from=new Date(date);
+				var date_to = new Date($('#Until').val());
+				var days = date_to - date_from;
+
+				if(days<0){
+					alert('日期错误');
+					$('#Until').val(addDate($('#Since').val(), 1));
+				}
+		    }
+		});	
+		
+		$('#Until').datepicker({ 
+			language: "en", 
+			dateFormat : 'yyyy-mm-dd', 
+			maxDate:new Date(),
+			autoClose:true,
+			onSelect: function onSelect(date) {
+
+				if($('#Since').val() == ''){
+					$('#Since').val(date);
+				}
+
+				var date_to=new Date(date);
+				var date_from = new Date($('#Since').val());
+				var days = date_to - date_from;
+
+				if(days<0){
+					alert('日期错误');
+					$('#Until').val(addDate($('#Since').val(), 1));
+				}
+		    }
+		});
+		
+		$('#UntilImg').datepicker({ 
+			language: "en", 
+			dateFormat : 'yyyy-mm-dd', 
+			maxDate:new Date(),
+			autoClose:true,
+			onSelect: function onSelect(date) {
+				$('#Until').val(date);
+
+				if($('#Since').val() == ''){
+					$('#Since').val(date);
+				}
+
+				var date_to=new Date(date);
+				var date_from = new Date($('#Since').val());
+				var days = date_to - date_from;
+
+				if(days<0){
+					alert('日期错误');
+					$('#Until').val(addDate($('#Since').val(), 1));
+				}
+		    }
+		});
+	});
+
+/*Support Function-------------------------------------------*/
+	function openItem(obj) {
+		document.getElementById(obj).style.display = 'block';
+		$('#BlockWindow').show();
+	}
+	
+	function closeItem(obj) {
+		document.getElementById(obj).style.display = 'none';
+		$('#BlockWindow').hide();
+	}
+	
+	$('#BlockWindow').click(function(){
+		closeItem('AdvancedSearchDialog');
+	});
+
+	function addDate(date,days){
+		var d=new Date(date);
+		d.setDate(d.getDate()+days);
+		var month=d.getMonth()+1;
+		var day = d.getDate();
+
+		if(month<10){
+			month = "0"+month;
+		}
+
+		if(day<10){
+			day = "0"+day;
+		}
+
+		var val = d.getFullYear()+"-"+month+"-"+day;
+		return val;
+	};
+	
+/*fullScreen-------------------------------------------------------------------*/
+	var FullScreen = false;
+		
+	$('#fullScreen').click(function() {
+		if (screenfull.enabled && !FullScreen) {
+			FullScreen = true;
+			screenfull.request();
+
+		}else if(screenfull.enabled && FullScreen){
+			FullScreen = false;
+			screenfull.exit();
+		}
+	});
+</script>
+
+<script>
+	$.sidebarMenu($('.sidebar-menu'))
+</script>
+
+</body>
+</html>
