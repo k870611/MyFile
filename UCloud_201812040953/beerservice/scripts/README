@@ -1,0 +1,5 @@
+import command example:
+mysql --user=root --password=dc2018_BMC  < procShowDB.sql
+
+DB dump command:
+mysqldump -u root -p server_management --routines -B server_management > Ali-BEER-DB_Dump-20180504160000.sql

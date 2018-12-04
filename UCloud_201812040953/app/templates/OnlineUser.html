@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/accmanagementlayout.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/onlineuserstyle.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar-menu.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/smart_wizard_vertical.css') }}">
+
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/sidebar-menu.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.smartWizard-2.0.min.js') }}"></script>
+
+	<script type=text/javascript>
+		$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+	  	var csrf_token = $('meta[name=csrf-token]').attr('content')
+
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+					xhr.setRequestHeader("X-CSRFToken", csrf_token)
+				}
+			}
+		})
+	</script>
+
+<title>中央管理系統(CMS)</title>
+</head>
+
+<body>
+<div id="BlockWindow" style="z-index:100; width:100%; height:100%; background:#e5e5e5; position:fixed; top:0px; left:0px; opacity:0.5; display:none;"></div>
+<div class="wrapper">
+	<header>
+		<!--導航列-->
+		{% include 'HeadNav.html' %}
+		<!--end 導航列-->
+	</header><!-- .header-->
+
+	<div class="middle">
+		<aside class="left-sidebar"> 
+			<aside class="main-sidebar">
+				<section  class="sidebar">
+					<ul class="sidebar-menu">
+						<li class="treeview active">
+							<a href="#">
+				           		<span>设备</span> <i class="fa fa-toggle-up pull-right"></i>
+							</a>
+				        	<ul class="treeview-menu">
+								<!--<li><a href="/itmanagement"><i class="fa fa-chevron-right"></i> IT Management</a></li>-->
+								<li><a href="#"><i class="fa fa-chevron-right"></i> BIOS 配置</a></li>
+								<li><a href="#"><i class="fa fa-chevron-right"></i> BIOS 升级</a></li>
+								<li><a href="#"><i class="fa fa-chevron-right"></i> BMC 配置</a></li>
+								<li><a href="#"><i class="fa fa-chevron-right"></i> BMC 升级</a></li>
+								<li>&nbsp;</li>
+				        	</ul>
+				      	</li>
+						<li class="treeview">
+							<a href="#">
+				           		<span>电源</span> <i class="fa fa-toggle-up pull-right"></i>
+							</a>
+				        	<ul class="treeview-menu">
+								<!--<li><a href="/itmanagement"><i class="fa fa-chevron-right"></i> IT Management</a></li>-->
+								<li><a href="#"><i class="fa fa-chevron-right"></i> 电源控制</a></li>
+								<li>&nbsp;</li>
+				        	</ul>
+				      	</li>
+				    </ul>
+				</section>
+			</aside>
+		</aside><!-- .left-sidebar -->
+		
+		<aside class="right-sidebar">
+
+			<ul class="SecondNavBar" style="background:#1a1e21;">
+				<li class="NavLi1"><div style="color:#bad0d5; border-radius: 3px; font-size:15px; font-weight: bold; height:20px; padding:5px 5px 0px 5px;">在线成员</div></li>
+			</ul>
+
+			<div class="MainTable">
+			<!--Add Server-->
+				<div class="DataMaintenceDialogNewComment" style="height:525px;">
+					<form>
+						<div id="wizard" class="swMain">
+							<ul>
+								<li >
+									<a href="#step-1"><span class="stepDesc">步骤 01<br /><small>模式选择</small></span></a><br/>
+									<i class="fa fa-eject fa-rotate-180" style="color:#838f9f; font-size:25px; position:relative; left:75px; top:0px;"></i>
+								</li>
+
+								<li>
+									<a href="#step-2"><span class="stepDesc">步骤 02<br /><small>基本讯息</small></span></a><br/>
+									<i class="fa fa-eject fa-rotate-180" style="color:#838f9f; font-size:25px; position:relative; left:75px; top:0px;"></i>
+								</li>
+
+								<li>
+									<a href="#step-3"><span class="stepDesc">步骤 03<br /><small>IPMI讯息</small></span></a><br/>
+									<i class="fa fa-eject fa-rotate-180" style="color:#838f9f; font-size:25px; position:relative; left:75px; top:0px;"></i>
+								</li>
+
+								<li>
+									<a href="#step-4"><span class="stepDesc">步骤 04<br /><small>确认新增</small></span></a>
+								</li>
+							</ul>
+
+
+							<div id="step-1">
+								<span class="StepTitle">模式选择</span>
+								<div style="width:100%; height:auto; position:relative; top:-10px; border: 2px solid #b4b7c6;">
+									<div style="margin:30px 0px 0px 15px;">
+										<table style="font-size:15px; font-family:'PMingLiU', Arial, sans-serif; font-weight: 600;">
+											<tr>
+												<td>请选择:</td>
+												<td>
+													<span>
+														<input id="SingleIPMI" type="radio" name="Mode" value="" style="width:15px; height:15px; margin:0px 0px 15px 15px;" checked="checked"/>单一IP<br/>
+														<input id="MultiIPMIs" type="radio" name="Mode" value="" style="width:15px; height:15px; margin:0px 0px 15px 15px;"/>多个IP<br/>
+														<input id="UniqueKey" type="radio" name="Mode" value="" style="width:15px; height:15px; margin:0px 0px 15px 15px;"/>Mac 地址<br/>
+													</span>
+												</td>
+											<tr>
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<div id="step-2">
+								<span class="StepTitle">基本讯息</span>
+								<div style="width:100%; height:auto; position:relative; top:-10px; border: 2px solid #b4b7c6;">
+
+									<div style="margin:30px 0px 0px 15px;">
+										<table class="SingleIPMI" style="width:98%; font-size:15px; font-family:'PMingLiU', Arial, sans-serif; font-weight: 600;">
+											<tr>
+												<td style="width:125px;">IP:</td>
+												<td>
+													<input id="singleIp" type="text" style="width:100%; height:20px; font-size:15px; margin-bottom:10px;" value="" required/>
+												</td>
+											<tr>
+
+											<tr>
+												<td style="width:125px;">账号:</td>
+												<td>
+													<input type="text" style="width:100%; height:20px; font-size:15px; margin-bottom:10px;" value="" required/>
+												</td>
+											<tr>
+
+											<tr>
+												<td style="width:125px;">密码:</td>
+												<td>
+													<input type="password" style="width:100%; height:20px; font-size:15px; margin-bottom:10px;" value="" required/>
+												</td>
+											<tr>
+										</table>
+
+										<table class="MultiIPMIs" style="width:98%; font-size:15px; font-family:'PMingLiU', Arial, sans-serif; font-weight: 600; display:none;">
+											<tr>
+												<td style="width:125px;">起始 IP:</td>
+												<td>
+													<input id="multiIpStart" class="singleIp" type="text" style="width:100%; height:20px; font-size:15px; margin-bottom:10px;" required/>
+												</td>
+											<tr>
+
+											<tr>
+												<td style="width:125px;">终点 IP:</td>
+												<td>
+													<input id="multiIpEnd" type="text" style="width:100%; height:20px; font-size:15px; margin-bottom:10px;" required/>
+												</td>
+											<tr>
+
+											<tr>
+												<td style="width:125px;">账户:</td>
+												<td>
+													<input type="text" style="width:100%; height:20px; font-size:15px; margin-bottom:10px;" required/>
+												</td>
+											<tr>
+
+											<tr>
+												<td style="width:125px;">密码:</td>
+												<td>
+													<input type="password" style="width:100%; height:20px; font-size:15px; margin-bottom:10px;" required/>
+												</td>
+											<tr>
+										</table>
+
+										<table class="UniqueKey" style="width:98%; font-size:15px; font-family:'PMingLiU', Arial, sans-serif; font-weight: 600; display: none;">
+											<tr>
+												<td style="width:125px;">帐户:</td>
+												<td>
+													<input type="text" style="width:100%; height:20px; font-size:15px; margin-bottom:10px;" required/>
+												</td>
+											<tr>
+
+											<tr>
+												<td style="width:125px;">密码:</td>
+												<td>
+													<input type="password" style="width:100%; height:20px; font-size:15px; margin-bottom:10px;" required/>
+												</td>
+											<tr>
+
+											<tr>
+												<td style="width:125px; vertical-align: top;">Mac 地址:</td>
+												<td>
+													<textarea style="width:100%; font-size:15px; margin-bottom:10px;" rows="10" required></textarea>
+												</td>
+											<tr>
+										</table>
+									</div>
+
+								</div>
+							</div>
+
+							<div id="step-3">
+								<span class="StepTitle">IPMI讯息</span>
+								<div style="width:100%; height:calc(100% - 25px); position:relative; top:-10px; border: 2px solid #b4b7c6;">
+
+									<div style="margin:30px 0px 0px 15px; height:calc(100% - 53px);">
+										<div style="width:98%; background: linear-gradient(#4b5e80, #3d5074); height:40px;  vertical-align: middle;">
+											<!--<button class="btnTabNav">
+												Test
+											</button>-->
+
+											<span style="color:yellow; font-size:15px; font-family:'PMingLiU', Arial, sans-serif; font-weight: 600; padding:10px 10px 0px 0px;font-style:italic; float:right;">选择"标签"栏位可新增!</span>
+										</div>
+
+										<table class="tbChooseIMPI" border="1" style="width:98%; height:calc(100% - 40px);">
+											<thead style="background:#d3d3d4; color:black; font-family:'微軟正黑體', '新細明體'; font-size:14px; width:100%;" align="left" >
+												<tr style="font-size:12px;">
+													<td style="border-right:groove 1px #e3e3e3; width:43px; max-width: 43px; padding:8px 0px 8px 0px;">
+														<input id="selectAllServer" type="checkbox" class="chkBoxTbChooseIPMI" checked style="position:relative;top:5px; left:10px; right:5px;width:15px; height:15px;"/>
+													</td>
+
+													<td style="border-right:groove 1px #e3e3e3; width:101px; max-width: 101px; padding:8px 0px 8px 5px;">槽位号</td>
+													<td style="border-right:groove 1px #e3e3e3; width:101px; max-width: 101px; padding:8px 0px 8px 5px;">IP</td>
+													<td style="border-right:groove 1px #e3e3e3; width:101px; max-width: 101px; padding:8px 0px 8px 5px;">账号</td>
+													<td style="border-right:groove 1px #e3e3e3; width:101px; max-width: 101px; padding:8px 0px 8px 5px;">密码</td>
+													<td style="border-right:groove 1px #e3e3e3; width:101px; max-width: 101px; padding:8px 0px 8px 5px;">标签</td>
+													<td style="border-right:groove 1px #e3e3e3; width:110px; max-width: 110px; padding:8px 0px 8px 5px;">Mac 地址</td>
+													<td style="border-right:groove 1px #e3e3e3; width:95px; max-width: 95px; padding:8px 0px 8px 5px;">连接状态</td>
+
+													<td style="padding:0px; min-width:25px; width:25px; max-width:25px;"></td>
+												</tr>
+											</thead>
+
+											<tbody style="background:#c2c7d0; color:black; font-family:'微軟正黑體', '新細明體'; height:100%;">
+												<tr align="left" style="height:100%;">
+													<td colspan="9" style="padding:0px;">
+														<div style="overflow-y:auto; width:816px; background:white; height:100%;">
+															<table id="myServerInfo" border="1" style="max-width:790px;">
+																<tbody style="background:#c2c7d0; color:black; font-family:'微軟正黑體', '新細明體'; font-size:12px">
+																	<tr>
+																		<td><input type='text' value='' readonly/></td>
+																		<td><input type='text' value='1' readonly/></td>
+																		<td><input type='text' value='192.168.0.1' readonly/></td>
+																		<td><input type='text' value='admin'/></td>
+																		<td><input type='password' value='*****' /></td>
+																		<td><input type='text' value='tag' /></td>
+																		<td><input type='text' value='30:0e:d5:ca:c4:00' readonly /></td>
+																		<td><input type='text' value='N/A' readonly /></td>
+																	</tr>
+
+																</tbody>
+																<!--
+																	<tr>
+																		<td><input type='text' value='' readonly/></td>
+																		<td><input type='text' value='1' readonly/></td>
+																		<td><input type='text' value='192.168.1.1' readonly/></td>
+																		<td><input type='text' value='admin'/></td>
+																		<td><input type='password' value='*****' /></td>
+																		<td><input type='text' value='tag' /></td>
+																		<td><input type='text' value='30:0e:d5:ca:c4:00' readonly /></td>
+																		<td><input type='text' value='N/A' readonly /></td>
+																	</tr>
+
+																	<tr>
+																		<td><input type="text" value="" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0; cursor:default;"/></td>
+																		<td><input type="text" value="2" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="10.67.18.255" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="admin" style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="password" value="*****" style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="tag" style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="aa:bb:cc:dd:ee:ff" readonly style="width:100%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="N/A" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																	</tr>-->
+															</table>
+														</div>
+													</td>
+												</tr>
+
+											</tbody>
+
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<div id="step-4">
+								<span class="StepTitle">确认新增</span>
+								<div style="width:100%; height:calc(100% - 25px); position:relative; top:-10px; border: 2px solid #b4b7c6;">
+									<div style="margin:30px 0px 0px 15px; height:calc(100% - 53px);">
+
+										<table class="tbChooseIMPI" border="1" style="width:98%; height:100%;">
+											<thead style="background:#d3d3d4; color:black; font-family:'微軟正黑體', '新細明體'; font-size:14px; width:100%;" align="left" >
+												<tr style="font-size:12px; font-weight: bold;">
+													<td style="border-right:groove 1px #e3e3e3; width:43px; max-width: 43px; padding:8px 0px 8px 0px;">
+														<input type="text" value="" readonly style="width:95%; background:#d3d3d4; border:#d3d3d4; cursor:default;"/>
+													</td>
+
+													<td style="border-right:groove 1px #e3e3e3; width:101px; max-width: 101px; padding:8px 0px 8px 5px;">槽位号</td>
+													<td style="border-right:groove 1px #e3e3e3; width:101px; max-width: 101px; padding:8px 0px 8px 5px;">IP</td>
+													<td style="border-right:groove 1px #e3e3e3; width:101px; max-width: 101px; padding:8px 0px 8px 5px;">账号</td>
+													<td style="border-right:groove 1px #e3e3e3; width:101px; max-width: 101px; padding:8px 0px 8px 5px;">密码</td>
+													<td style="border-right:groove 1px #e3e3e3; width:101px; max-width: 101px; padding:8px 0px 8px 5px;">标签</td>
+													<td style="border-right:groove 1px #e3e3e3; width:110px; max-width: 110px; padding:8px 0px 8px 5px;">Mac 地址</td>
+													<td style="border-right:groove 1px #e3e3e3; width:90px; max-width: 90px; padding:8px 0px 8px 5px;">连接状态</td>
+
+													<td style="padding:0px; min-width:25px; width:25px; max-width:25px;"></td>
+												</tr>
+											</thead>
+
+											<tbody style="background:#c2c7d0; color:black; font-family:'微軟正黑體', '新細明體'; height:100%;">
+												<tr align="left" style="height:100%;">
+													<td colspan="9" style="padding:0px;">
+														<div style="overflow-y:auto; width:816px; background:white; height:100%;">
+															<table id="selectIpmiInfo" border="1" style="max-width:790px;">
+																<tbody style="background:#c2c7d0; color:black; font-family:'微軟正黑體', '新細明體'; font-size:12px">
+																	<tr>
+																		<td><input type='text' value='' readonly/></td>
+																		<td><input type='text' value='1' readonly/></td>
+																		<td><input type='text' value='192.168.0.1' readonly/></td>
+																		<td><input type='text' value='admin'/></td>
+																		<td><input type='password' value='*****' /></td>
+																		<td><input type='text' value='tag' /></td>
+																		<td><input type='text' value='30:0e:d5:ca:c4:00' readonly /></td>
+																		<td><input type='text' value='N/A' readonly /></td>
+																	</tr>
+
+																</tbody>
+																<!--
+																	<tr>
+																		<td><input type="text" value="" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0; cursor:default;"/></td>
+																		<td><input type="text" value="1" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="192.168.1.1" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="admin" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="password" value="*****" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="tag" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="30:0e:d5:ca:c4:00" readonly style="width:100%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="N/A" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																	</tr>
+
+																	<tr>
+																		<td><input type="text" value="" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0; cursor:default;"/></td>
+																		<td><input type="text" value="2" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="10.67.18.255" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="admin" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="password" value="*****" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="tag" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="aa:bb:cc:dd:ee:ff" readonly style="width:100%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																		<td><input type="text" value="N/A" readonly style="width:95%; background:#c2c7d0; border:#c2c7d0;"/></td>
+																	</tr>-->
+															</table>
+														</div>
+													</td>
+												</tr>
+
+											</tbody>
+
+										</table>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</aside><!-- .right-sidebar -->
+	</div><!-- .middle-->
+</div><!-- .wrapper -->
+
+<script>
+
+	$(document).ready(function(){
+		//SearchNavBar-------------------------------------------------------------
+	   	$('#clean_acc').hide();
+		
+		$('#text_acc').click(function(){
+			
+			$('#search_acc').css('left','455px');
+			$('#clean_acc').show();
+		});
+		
+		$('#text_acc').focusout(function(){
+			if($(this).val() == ''){
+				chkSearchText();
+			}
+		});
+
+		function chkSearchText(){
+			setTimeout(function() {
+				$('#text_acc').val('');
+				$('#search_acc').css('left','420px');
+				$('#clean_acc').hide();
+			}, 500);
+		}
+
+		$('#clean_acc').click(function(){
+			window.location.href = ('/online');
+		});
+
+		$('#search_acc').click(function(){
+			var filter = $('#rightNav select').val();
+			var value = $('#text_acc').val();
+
+			window.location.href = ('/onlineSearch?filter='+filter+'&value='+value);
+		});
+	});
+
+/*fullScreen-------------------------------------------------------------------*/
+	var FullScreen = false;
+
+	$('#fullScreen').click(function() {
+		if (screenfull.enabled && !FullScreen) {
+			FullScreen = true;
+			screenfull.request();
+
+		}else if(screenfull.enabled && FullScreen){
+			FullScreen = false;
+			screenfull.exit();
+		}
+	});
+</script>
+
+<script>
+	$.sidebarMenu($('.sidebar-menu'))
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	// Smart Wizard
+	$('#wizard').smartWizard({
+		transitionEffect:'slide'
+	});
+
+	$('#SingleIPMI').click(function(){
+		$('.SingleIPMI').show();
+		$('.MultiIPMIs').hide();
+		$('.UniqueKey').hide();
+	});
+
+	$('#MultiIPMIs').click(function(){
+		$('.SingleIPMI').hide();
+		$('.MultiIPMIs').show();
+		$('.UniqueKey').hide();
+	});
+
+	$('#UniqueKey').click(function(){
+		$('.SingleIPMI').hide();
+		$('.MultiIPMIs').hide();
+		$('.UniqueKey').show();
+	});
+});
+
+function myChangeServerTag(t){
+	var x = t;
+	var val = t.value;
+	$(t).attr('value', val);
+}
+</script>
+
+</body>
+</html>

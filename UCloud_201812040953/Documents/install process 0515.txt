@@ -1,0 +1,94 @@
+﻿安装步骤
+
+1.将formal 资料夹放于桌面
+
+2.安装：(资料夹位于：%UserProfile%\Desktop\Formal\KyLin\install：)
+	a.mysql-installer-community-5.7.22.0.msi
+					设定安装路径为：预设路径 - C:\ProgramData\MySQL
+					账号:root 密码为:123456
+	
+	b.python-3.4.4.amd64.msi
+					设定安装路径为：预设路径 - C:\Python34
+					设定环境变数: 控制面板\所有控制面板项\系统\高级系统设置\高级\环境变量 在path 加入 C:\Python34 & C:\Python34\Scripts
+					
+	c.ChromeStandaloneSetup.exe
+	d.python_lib(DB, Flask, socketio) by pip
+		(1) DB：
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\DB\mysql-connector-2.1.6.tar.gz  
+					安装资料夹python_lib中找 mysql-connector-python-8.0.11-py3.4-windows-x86-64bit.msi,然后双击安装给程序包即可； 
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\DB\PyMySQL-master.zip
+		(2) Flask：
+			（安装flask 主程式 - 解析html 让html可以执行python）i.Flask: 
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\Flask\click-6.7-py2.py3-none-any.whl
+          			        pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\Flask\itsdangerous-0.24.tar.gz
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\Flask\MarkupSafe-1.0.tar.gz
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\Flask\Werkzeug-0.12.2-py2.py3-none-any.whl
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\Flask\Jinja2-2.9.6-py2.py3-none-any.whl
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\Flask\Flask-0.12.2-py2.py3-none-any.whl
+			ii.Form(表单): 
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\Form\WTForms-2.0.1-py2.py3-none-any.whl
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\Form\Flask-WTF-0.14.2.tar.gz
+			iii.permission(权限): 
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\permission\blinker-1.4.tar.gz
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\permission\Flask-Principal-0.4.0.tar.gz
+			iv.Login(登入，密码验证): 
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\Flask-Login-0.3.0.tar.gz
+			v.SqlAlchemy(连接数据库):
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\SQLAlchemy-1.2.4.tar.gz
+					pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\Flask\Flask-SQLAlchemy-2.1.tar.gz
+		
+		(3) socketio: 
+				pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\socketio\1.six-master.zip
+				pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\socketio\2.python-engineio-master.zip
+				pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\socketio\3.python-socketio-master.zip
+				pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\socketio\4.Flask-SocketIO-master.zip
+				python -m easy_install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\socketio\greenlet-0.4.5-py3.4-win-amd64.egg
+				pip install %UserProfile%\Desktop\Formal\KyLin\install\python_lib\socketio\eventlet-0.22.1-py2.py3-none-any.whl
+			
+	e.在资料夹里边找到Java程序包并双击安装：jre-8u172-windows-x64.exe
+
+3.设定开机启动项：(在左下角找到“有问题尽管问我”并打开，搜索“regedit” 并找到后边的文件"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run",然后右击空白处，新建（两个）-->字符串值，并改名为如下；	
+	a.新建字符串值
+		(1)名称：beerservice，在资料夹里边找beerservice，复制路径加上"/beer_service.cmd"，右击该名称并修改值为此。
+		(2)名称：run_auto，在资料夹里边找app，复制路径加上"/run_auto.bat"，右击该名称并修改值为此。
+
+ 4.设定mysql event scheduler
+	a.设定my.ini，复制后边的路径“C:\ProgramData\MySQL\MySQL Server 5.7\my.ini”，然后找到资料夹中的JAVA文件夹，并在其搜索路径中粘贴“C:\ProgramData\MySQL\MySQL Server 5.7\my.ini”，然后打开一个配置文件，并执行如下修改；
+	b.执行：编辑-->查找-->[mysqld]
+	c.在[mysqld]下方加入event_scheduler=on
+
+5.设定settings.cmd,在资料夹中找到“KyLin-->beerservice文件中的settings.cmd，然后“右击-->编辑”，如果前期在安装的过程中没有修改过任何信息，则不需要修改该文件中的内容；路径为(%UserProfile%\Desktop\Formal\KyLin\beerservice\settings.cmd)
+	SET MYSQL=C:\Program Files\MySQL\MySQL Workbench 6.3 CE\mysql.exe(若安装路径有更动请调整路径)
+	SET HOST=localhost(若使用本机则无须更改)
+	SET PORT=3306 (若mysql端口有换请调整)
+	SET DBUSER=root (若要更换使用者请将DBUSER 改为您要使用的account & password)
+	SET DBPWD=123456 (系统安装时设定为123456)
+	SET PYTHON=C:\Python34\python.exe (若安装路径有更动请调整路径)
+	SET IPMITOOL=..\tools\ipmitool.exe (若有移动tools资料夹必须调整路径)
+
+
+6.设定dbSettingsInfo.py ，在资料夹中找到“KyLin-->app",右击“dbSettingsInfo.py”选择打开方式为“记事本”；(%UserProfile%\Desktop\Formal\KyLin\app\dbSettingsInfo.py)
+	DATABASE = {
+		'drivername': 'mysql+mysqlconnector',# 若使用不同mysql connector 需更换成所使用的驱动
+		'host': 'localhost', # host, port, username, password 需遵循settings.cmd 中的HOST,PORT, DBUSER, DBPWD
+		'port': '3306',
+		'username': 'root',
+		'password': '123456',
+		'database': 'server_management'
+	}
+	
+7.打开命令提示符（cmd）执行如下命令:auto-build-db.py
+	a.cd %UserProfile%\Desktop\Formal\KyLin\beerservice
+	b.python auto-build-db.py
+	c。如上步骤全部安装好，则执行重启PC操作；
+	
+	
+	
+
+
+
+
+
+
+	
+	
