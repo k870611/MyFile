@@ -39,13 +39,12 @@ def arp_check(ip):
 def bios_config_form_action():
     print("into bios_config_form_action3")
 
-    bios_config = BiosConfigForm()
+    bios_form = request.get_json(force=True).get('bios_form')
 
-    # print(bios_config.Share_NIC_Control_output.data)
-    nick_name = request.form.get("Share_NIC_Control_output")
-    print("Share_NIC_Control_output", nick_name)
-    # a = request.get_json()
-    # print(a)
+    if len(bios_form) > 1 and bios_form is not None:
+        bios_form = bios_form[1:]
+
+    print(bios_form)
 
     return jsonify({'Success': 'True'})
 

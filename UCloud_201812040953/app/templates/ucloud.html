@@ -797,16 +797,22 @@
 		//$.post('some/url', $('#myForm').serialize());
 		$('#click').click(function(){
 			alert("click");
-			var post_data = $('#bios_config_form').serialize();
+			var post_data = $('#bios_config_form').serializeArray();
+
+			var json_info = {
+			    "bios_form" : post_data
+			}
 
 			$.ajax({
 				type: "post",
 				url: $SCRIPT_ROOT + "/bios_config_form_action",
-				data: post_data,
+				contentType: 'application/json;charset=UTF-8',
+				data: JSON.stringify(json_info, null, '\t'),
+				cache : false,
 				success: function(data) {
 					if (data.Success == 'True') {
 						alert('新增服务器成功');
-						alert(post_data);
+						//alert(post_data);
 						//window.location.href = "/tankManagement";
 					}
 				},
