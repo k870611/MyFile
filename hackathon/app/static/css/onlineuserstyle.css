@@ -1,0 +1,183 @@
+thead{
+	height: 40px;
+}
+
+tfoot{
+	height: 40px;
+}
+
+td label{
+    display: block;
+    width:auto;
+}
+
+.TopNavBar {
+	background: url(../img/bg1.png);
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	overflow: hidden;
+}
+
+.SecondNavBar {
+	background-color: #112347;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	overflow: hidden;
+	height:41px;
+}
+
+.SideNavBar {
+	background-color: #0b172d;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.NavLi1 {
+	font-family: "Microsoft JhengHei", "PMingLiU";
+	font-size: 18px;
+	font-weight: bold;
+	color: #EEEEEE;
+	float: left;
+	padding: 10px;
+}
+
+.NavLi2 {
+	font-family: "Microsoft JhengHei", "PMingLiU";
+	font-size: 18px;
+	font-weight: bold;
+	color: #EEEEEE;
+	float: right;
+	padding: 10px;
+}
+
+.anchor {
+	color: #e5e5e5;
+	text-decoration: none;
+}
+
+.MainTable {
+	width:calc(100% - 2px);
+	height:calc(100% - 45px);
+	border-spacing: 0;
+	border: groove 1px Black;
+	/*min-width: 1163px;*/
+}
+
+.tbDataMaintence {
+	font-family: "Microsoft JhengHei", "PMingLiU";
+	color: black;
+	width: 100%;
+	border-collapse: separate;
+	border: groove 2px #b4b7c6;
+}
+
+.tbDataMaintence td {
+	padding: 10px;
+	border-spacing: 10px;
+}
+
+.circle {
+	width: 25px;
+	height: 25px;
+	font-size: 15px;
+	background-color: red;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	text-align: center;
+	color: white;
+}
+
+.btnRightNav {
+	margin-left: 10px;
+	padding: 0px;
+	background: #183368;
+	border-color: #183368;
+	border-radius: 5px;
+	width: 35px;
+	height: 40px;
+}
+
+.btnRightNav:focus,.btnRightNav img:hover {
+	cursor: pointer;
+}
+
+.close {
+	float: right;
+	position: relative;
+	top: -5px;
+	right: 10px;
+	border: 0px;
+}
+
+.DataMaintenceDialogNew {
+	position: absolute;
+	top: calc(50% - 293px);
+	left: 20%;
+	width: 1050px;
+	height: 571px;
+	border: 1px solid #3f4757;
+	z-index: 300;
+	background-color: #1a1e21;
+	padding-top: 15px;
+	color: #bad0d5;
+	font-weight: bold;
+	font-size: 18px;
+	/*display: none;*/
+}
+
+.DataMaintenceDialogNewComment {
+	height: 60px;
+	/*width: 1049px;*/
+	background-color: #cfd7f0;
+	border-color: #cfd7f0;
+	/*margin: 10px 5px 0 5px;*/
+	padding-top: 10px;
+	font-size: 12px;
+}
+
+.main-sidebar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	min-height: 100%;
+	width: 230px;
+	background-color: #222d32;
+	font-family: '微軟正黑體', '新細明體';
+	font-size: 15px;
+}
+
+.GoToOther {
+	color: #788ca8;
+	border-radius: 3px;
+	font-size: 15px;
+	font-weight: bold;
+	height: 20px;
+	padding: 5px 5px 0px 5px;
+}
+
+.GoToOther a {
+	color: #788ca8;
+}
+
+.GoToOther:hover {
+	color: white;
+	background-color: #00b4ef;
+	border-radius: 3px;
+	font-size: 15px;
+	font-weight: bold;
+	height: 20px;
+	padding: 5px 5px 0px 5px;
+}
+
+.GoToOther a:hover {
+	color: white;
+}
