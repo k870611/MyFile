@@ -1,1 +1,0 @@
-python %UserProfile%\Desktop\Formal\KyLin\app\run.py
