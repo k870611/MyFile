@@ -15,8 +15,10 @@ class Downloader(object):
 
     async def download_single_page(self, url):
         async with aiohttp.ClientSession() as session:
-            async with session.get(url) as resp:
+            # set proxy to connect
+            async with session.get(url, proxy="http://10.67.19.104:8989") as resp:
                 self._htmls.append((re.search('\d+', url).group(), await resp.text()))
+
 
     def download(self):
         print('downloading  ..........')
